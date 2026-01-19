@@ -1,5 +1,7 @@
 #include "cub3d.h"
 
+# define ROV 1000
+
 int init_player(t_data *game)
 {
 	game->player.angle = 0;
@@ -83,7 +85,7 @@ void vanish_line(t_data *game)
 		x += 4;
 		y = game->player.posy;
 		y += 4;
-		while (front_pix < 500)
+		while (front_pix < ROV)
 		{
 			if (is_in_block(x, y, game))
 				break;
@@ -103,7 +105,7 @@ void vanish_line(t_data *game)
 		x += 4;
 		y = game->player.posy;
 		y += 4;
-		while (front_pix < 500)
+		while (front_pix < ROV)
 		{
 			if (is_in_block(x, y, game))
 				break;
@@ -133,7 +135,7 @@ void draw_line_player(t_data *game)
 		x += 4;
 		y = game->player.posy;
 		y += 4;
-		while (front_pix < 500)
+		while (front_pix < ROV)
 		{
 			if (is_in_block(x, y, game))
 				break;
@@ -153,7 +155,7 @@ void draw_line_player(t_data *game)
 		x += 4;
 		y = game->player.posy;
 		y += 4;
-		while (front_pix < 500)
+		while (front_pix < ROV)
 		{
 			if (is_in_block(x, y, game))
 				break;

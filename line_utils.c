@@ -8,7 +8,9 @@ void update_map(t_data *game)
     rp_x = game->player.posx / (1920 / game->map.size_map[0]);
     rp_y = game->player.posy / (1080 / game->map.size_map[1]);
 
-    if (game->map.map[rp_x][rp_y] != 'P')
-        game->map.map[rp_x][rp_y] = 'P';
-    printf ("rp_x = %d rp_y %d\n", rp_x, rp_y);
+    /* rp_x is a column derived from posx, rp_y is a row derived from posy.
+       The map is stored as map[row][col], so swap the indices when indexing. */
+    if (game->map.map[rp_y][rp_x] != 'P')
+        game->map.map[rp_y][rp_x] = 'P';
+    printf ("col = %d row = %d\n", rp_x, rp_y);
 }

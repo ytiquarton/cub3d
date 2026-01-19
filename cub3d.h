@@ -33,7 +33,7 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	int *size_map;
+	int size_map[2];
 	char **map;
 }               t_map;
 
