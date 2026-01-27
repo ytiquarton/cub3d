@@ -69,8 +69,8 @@ void draw_map(char *name, t_data *game)
     if (fd < 0)
         return;
     init_map(fd, game);
-    tile_w = 1920 / game->map.size_map[0];
-    tile_h = 1080 / game->map.size_map[1];
+    tile_w = win_x / game->map.size_map[0];
+    tile_h = win_y / game->map.size_map[1];
     i = 0;
     while (i < game->map.size_map[1])
     {

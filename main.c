@@ -14,7 +14,7 @@ void my_mlx_pixel_put(t_windata *data, int x, int y, int color)
 
 	if (x < 0 || y < 0)
 		return ;
-	if (x >= 1920 || y >= 1080)
+	if (x >= win_x || y >= win_y)
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
 	*(unsigned int*)dst = color;
@@ -92,7 +92,7 @@ void vanish_line(t_data *game)
 			my_mlx_pixel_put(&game->windata, x, y, 0x00000000);
 			x += cos(game->player.angle + (line / 35.0f));
 			y += sin(game->player.angle + (line / 35.0f));
-			if (x > 1920 || y > 1080 || x < 0 || y < 0)
+			if (x > win_x || y > win_y || x < 0 || y < 0)
 				break ;
 			front_pix++;
 		}
@@ -112,7 +112,7 @@ void vanish_line(t_data *game)
 			my_mlx_pixel_put(&game->windata, x, y, 0x00000000);
 			x += cos(game->player.angle - (line / 35.0f));
 			y += sin(game->player.angle - (line / 35.0f));
-			if (x > 1920 || y > 1080 || x < 0 || y < 0)
+			if (x > win_x || y > win_y || x < 0 || y < 0)
 				break ;
 			front_pix++;
 		}
@@ -142,7 +142,7 @@ void draw_line_player(t_data *game)
 			my_mlx_pixel_put(&game->windata, x, y, 0x00FFFFFF);
 			x += cos(game->player.angle + (line / 35.0f));
 			y += sin(game->player.angle + (line / 35.0f));
-			if (x > 1920 || y > 1080 || x < 0 || y < 0)
+			if (x > win_x || y > win_y || x < 0 || y < 0)
 				break ;
 			front_pix++;
 		}
@@ -162,7 +162,7 @@ void draw_line_player(t_data *game)
 			my_mlx_pixel_put(&game->windata, x, y, 0x00FFFFFF);
 			x += cos(game->player.angle - (line / 35.0f));
 			y += sin(game->player.angle - (line / 35.0f));
-			if (x > 1920 || y > 1080 || x < 0 || y < 0)
+			if (x > win_x || y > win_y || x < 0 || y < 0)
 				break ;
 			front_pix++;
 		}
@@ -208,13 +208,14 @@ int main(void)
 	t_data		game;
 
 	game.mlx.mlx = mlx_init();
-	game.windata.img = mlx_new_image(game.mlx.mlx, 1920, 1080);
+	game.windata.img = mlx_new_image(game.mlx.mlx, win_x, win_y);
 	game.windata.addr = mlx_get_data_addr(game.windata.img, &game.windata.bpp, &game.windata.line_length, &game.windata.endian); //code pour set les variable en fonction de la taille de l'image
-	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, 1920, 1080, "test");
-	draw_map("map.txt", &game);
+	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, win_x, win_y, "test");
+	// draw_map("map.txt", &game);
 	init_player(&game);
-	draw_player(&game);
-	draw_line_player(&game);
+	// draw_player(&game);
+	// draw_line_player(&game);
+	draw_sky_g(&game);
 	mlx_hook(game.mlx.mlx_win, 2, 1L<<0, move_player, &game);
 	mlx_loop(game.mlx.mlx);
 	return (0);
