@@ -4,7 +4,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g
 
 SRC = main.c movements.c parse_map.c gnl.c gnl_utils.c utils.c line_utils.c\
-draw_fts.c
+draw_fts.c fts.c
 OBJ = $(SRC:.c=.o)
 
 MLX_DIR = mlx_linux

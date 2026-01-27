@@ -10,6 +10,7 @@
 # define pi 3.14159265
 # define win_x 1920
 # define win_y 1080
+# define ROV 1000
 
 typedef struct s_mlx_data
 {
@@ -57,6 +58,8 @@ void my_mlx_pixel_put(t_windata *data, int x, int y, int color);
 void draw_map(char *name, t_data *game);
 void update_map(t_data *game);
 int is_in_block(int x, int y, t_data *game);
+void init_map(char *name, t_data *game);
+void draw_walls(t_data *game);
 
 int draw_sky_g(t_data *game);
 

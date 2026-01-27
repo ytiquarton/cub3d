@@ -1,6 +1,5 @@
 #include "cub3d.h"
 
-# define ROV 1000
 
 int init_player(t_data *game)
 {
@@ -26,154 +25,10 @@ int close_win(t_data *game)
 	exit (0);
 }
 
-void draw_player(t_data *game)
-{
-	float x;
-	float y;
-	int i = 0;
-	int j = 0;
-
-	x = game->player.posx;
-	y = game->player.posy;
-	while (i < 10)
-	{
-		j = 0;
-		while (j < 10)
-		{
-			my_mlx_pixel_put(&game->windata, i + x, j + y, 0x00FF0000);
-			j++;
-		}
-		i++;
-	}
-	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win, game->windata.img, 0, 0);
-}
-
-void vanish_player(t_data *game)
-{
-		float x;
-	float y;
-	int i = 0;
-	int j = 0;
-
-	x = game->player.posx;
-	y = game->player.posy;
-	while (i < 10)
-	{
-		j = 0;
-		while (j < 10)
-		{
-			my_mlx_pixel_put(&game->windata, i + x, j + y, 0x00000000);
-			j++;
-		}
-		i++;
-	}
-	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win, game->windata.img, 0, 0);
-}
-
-void vanish_line(t_data *game)
-{
-	int front_pix;
-	float x;
-	float y;
-	float line;
-	
-	line = 0;
-	while (line < 20)
-	{
-		front_pix = 0;
-		x = game->player.posx;
-		x += 4;
-		y = game->player.posy;
-		y += 4;
-		while (front_pix < ROV)
-		{
-			if (is_in_block(x, y, game))
-				break;
-			my_mlx_pixel_put(&game->windata, x, y, 0x00000000);
-			x += cos(game->player.angle + (line / 35.0f));
-			y += sin(game->player.angle + (line / 35.0f));
-			if (x > win_x || y > win_y || x < 0 || y < 0)
-				break ;
-			front_pix++;
-		}
-		line++;
-	}
-	while (line > 0)
-	{
-		front_pix = 0;
-		x = game->player.posx;
-		x += 4;
-		y = game->player.posy;
-		y += 4;
-		while (front_pix < ROV)
-		{
-			if (is_in_block(x, y, game))
-				break;
-			my_mlx_pixel_put(&game->windata, x, y, 0x00000000);
-			x += cos(game->player.angle - (line / 35.0f));
-			y += sin(game->player.angle - (line / 35.0f));
-			if (x > win_x || y > win_y || x < 0 || y < 0)
-				break ;
-			front_pix++;
-		}
-		line--;
-	}
-}
-
-void draw_line_player(t_data *game)
-{
-	int front_pix;
-	float x;
-	float y;
-	float line;
-	
-	line = 0;
-	while (line < 20) // côté gauche
-	{
-		front_pix = 0;
-		x = game->player.posx;
-		x += 4;
-		y = game->player.posy;
-		y += 4;
-		while (front_pix < ROV)
-		{
-			if (is_in_block(x, y, game))
-				break;
-			my_mlx_pixel_put(&game->windata, x, y, 0x00FFFFFF);
-			x += cos(game->player.angle + (line / 35.0f));
-			y += sin(game->player.angle + (line / 35.0f));
-			if (x > win_x || y > win_y || x < 0 || y < 0)
-				break ;
-			front_pix++;
-		}
-		line++;
-	}
-	while (line > 0) // coté droit ou jsp
-	{
-		front_pix = 0;
-		x = game->player.posx;
-		x += 4;
-		y = game->player.posy;
-		y += 4;
-		while (front_pix < ROV)
-		{
-			if (is_in_block(x, y, game))
-				break;
-			my_mlx_pixel_put(&game->windata, x, y, 0x00FFFFFF);
-			x += cos(game->player.angle - (line / 35.0f));
-			y += sin(game->player.angle - (line / 35.0f));
-			if (x > win_x || y > win_y || x < 0 || y < 0)
-				break ;
-			front_pix++;
-		}
-		line--;
-	}
-}
-
 int move_player (int keycode, t_data *game)
 {
 	// update_map(game);
-	vanish_line(game);
+	// vanish_line(game);
 	if (keycode == 'w')
 		move_front(game);
 	else if (keycode == 'a')
@@ -198,8 +53,8 @@ int move_player (int keycode, t_data *game)
 	}
 	else
 		printf("keycode = %d\n", keycode);
-	draw_line_player(game);
-	draw_player(game);
+	// draw_line_player(game);
+	// draw_player(game);
 	return (0);
 }
 
@@ -212,10 +67,11 @@ int main(void)
 	game.windata.addr = mlx_get_data_addr(game.windata.img, &game.windata.bpp, &game.windata.line_length, &game.windata.endian); //code pour set les variable en fonction de la taille de l'image
 	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, win_x, win_y, "test");
 	// draw_map("map.txt", &game);
+	init_map("map.txt", &game);
 	init_player(&game);
 	// draw_player(&game);
-	// draw_line_player(&game);
 	draw_sky_g(&game);
+	draw_walls(&game);
 	mlx_hook(game.mlx.mlx_win, 2, 1L<<0, move_player, &game);
 	mlx_loop(game.mlx.mlx);
 	return (0);

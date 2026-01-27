@@ -25,7 +25,3 @@ int draw_sky_g(t_data *game)
     mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win, game->windata.img, 0, 0);
     return(0);
 }
-
-int draw_wall(t_data *game)
-{
-}

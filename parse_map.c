@@ -17,11 +17,21 @@ char **add_one_malloc(char **tab)
 }
 
 
-void init_map(int fd, t_data *game)
+void init_map(char *name, t_data *game)
 {
     char *line;
     int y = 0;
+    int fd;
+    int i;
+    int j;
+    int tile_w;
+    int tile_h;
 
+    tile_w = win_x / game->map.size_map[0];
+    tile_h = win_y / game->map.size_map[1];
+    fd = open(name, O_RDONLY);
+    if (fd < 0)
+        return;
     game->map.map = malloc(sizeof(char *));
     game->map.map[0] = NULL;
 
@@ -35,51 +45,12 @@ void init_map(int fd, t_data *game)
 
     game->map.size_map[1] = y;
     game->map.size_map[0] = ft_strlen(game->map.map[0]) - 1; // sans '\n'
-}
-
-
-void draw_block(int x, int y, int tile_w, int tile_h, t_data *game)
-{
-    int i = 0;
-    int j;
-
-    while (i < tile_w)
-    {
-        j = 0;
-        while (j < tile_h)
-        {
-            my_mlx_pixel_put(&game->windata, x + i, y + j, 0x00FFFF00);
-            j++;
-        }
-        i++;
-    }
-}
-
-
-
-void draw_map(char *name, t_data *game)
-{
-    int fd;
-    int i;
-    int j;
-    int tile_w;
-    int tile_h;
-
-    fd = open(name, O_RDONLY);
-    if (fd < 0)
-        return;
-    init_map(fd, game);
-    tile_w = win_x / game->map.size_map[0];
-    tile_h = win_y / game->map.size_map[1];
     i = 0;
     while (i < game->map.size_map[1])
     {
         j = 0;
         while (j < game->map.size_map[0])
         {
-            if (game->map.map[i][j] == '1')
-                draw_block(j * tile_w, i * tile_h, tile_w, tile_h, game);
-
             if (game->map.map[i][j] == 'P')
             {
                 game->player.posx = j * tile_w + tile_w / 2;
