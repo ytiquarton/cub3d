@@ -23,8 +23,8 @@ int is_in_block(int x, int y, t_data *game)
         return (0);
     if (game->map.size_map[0] <= 0 || game->map.size_map[1] <= 0)
         return (0);
-    tile_w = win_x / game->map.size_map[0];
-    tile_h = win_y / game->map.size_map[1];
+    tile_w = WIN_X / game->map.size_map[0];
+    tile_h = WIN_Y / game->map.size_map[1];
     if (tile_w == 0 || tile_h == 0)
         return (0);
     col = x / tile_w;

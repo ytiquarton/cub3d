@@ -12,5 +12,5 @@ void update_map(t_data *game)
        The map is stored as map[row][col], so swap the indices when indexing. */
     if (game->map.map[rp_y][rp_x] != 'P')
         game->map.map[rp_y][rp_x] = 'P';
-    printf ("col = %d row = %d\n", rp_x, rp_y);
+    // printf ("col = %d row = %d\n", rp_x, rp_y);
 }

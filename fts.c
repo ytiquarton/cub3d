@@ -10,16 +10,16 @@ void draw_one_wall(t_data *game, int height, int pos)
     int c_y;
     int c_x;
 
-    rel_posx = (1920 / 40) * pos;
-    rel_height = (1080 / 1920) * height;
-    rel_height = 1080 - rel_height;
-    rel_posy = (1080 - rel_height) / 2;
+    rel_posx = (1920 / NOLINE) * pos;
+    rel_height = (1080.0f / 1920.0f) * (float) height; // largeur de l'ecran divise par la longueur max du fil + hauteur normalement du mur
+    // rel_height = 1080 - rel_height;
+    rel_posy = (1080 - (int) rel_height) / 2;
     c_x = 0;
-    printf("height = %d, pos = %d\n", height, pos);
-    while (c_x < 27)
+    printf("height = %d, pos = %d, relposx = %d, relheight = %f\n", height, pos, rel_posx, rel_height);
+    while (c_x < 1920 / NOLINE)
     {
         c_y = 0;
-        while (c_y < rel_height)
+        while (c_y < (int) rel_height)
         {
             my_mlx_pixel_put(&game->windata, rel_posx + c_x, rel_posy + c_y, 0x00FF0000);
             c_y++;
@@ -35,10 +35,9 @@ void draw_walls(t_data *game)
 	float y;
 	float line;
 	
-	line = 0;
-	while (line < NOLINE / 2) // côté gauche
+	line = 20;
+	while (line > 0) // côté gauche
 	{
-        // printf("debug2\n");
 		front_pix = 0;
 		x = game->player.posx;
 		x += 4;
@@ -48,18 +47,19 @@ void draw_walls(t_data *game)
 		{
 			if (is_in_block(x, y, game))
             {
-				draw_one_wall(game, front_pix, line);
+				draw_one_wall(game, front_pix, (int) line);
                 break;
             }
 			x += cos(game->player.angle + (line / 35.0f));
 			y += sin(game->player.angle + (line / 35.0f));
-			if (x > win_x || y > win_y || x < 0 || y < 0)
+			if (x > WIN_X || y > WIN_Y || x < 0 || y < 0)
 				break ;
 			front_pix++;
 		}
-		line++;
+		line--;
 	}
-	while (line > 0) // coté droit ou jsp
+	line = 0;
+	while (line < NOLINE / 2) // coté droit ou jsp
 	{
 		front_pix = 0;
 		x = game->player.posx;
@@ -75,10 +75,12 @@ void draw_walls(t_data *game)
             }
 			x += cos(game->player.angle - (line / 35.0f));
 			y += sin(game->player.angle - (line / 35.0f));
-			if (x > win_x || y > win_y || x < 0 || y < 0)
+			if (x > WIN_X || y > WIN_Y || x < 0 || y < 0)
 				break ;
 			front_pix++;
 		}
-		line--;
+		line++;
 	}
 }
+
+// faire la fonction pour voir lintersection plus rapidement avec calcul des droites (voir dessins)
