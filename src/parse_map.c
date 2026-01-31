@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   workspace.json                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/29 17:33:12 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/29 17:39:01 by marccost         ###   ########.ch       */
+/*   Created: 2026/01/31 15:38:01 by marccost          #+#    #+#             */
+/*   Updated: 2026/01/31 15:38:07 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,23 @@ char	**add_one_malloc(char **tab)
 
 int	init_map(int fd, t_data *game)
 {
-	char	*line;
 	int		y;
 
 	y = 0;
 	game->map.map = fullread_fd(fd);
 	if (!game->map.map)
 		return (0);
-
+	
 	game->map.size_map[1] = y;
-	game->map.size_map[0] = ft_strlen(game->map.map[0]) - 1; // sans '\n'
+	game->map.size_map[0] = ft_strlen(game->map.map[0]) - 1;
 	return (1);
 }
 
 
 void	draw_block(int x, int y, int tile_w, int tile_h, t_data *game)
 {
-	int i = 0;
-	int j;
+	int	i = 0;
+	int	j;
 
 	while (i < tile_w)
 	{

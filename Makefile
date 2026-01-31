@@ -3,12 +3,12 @@ NAME = cubtest
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 
-SRC = main.c movements.c parse_map.c gnl.c gnl_utils.c utils.c line_utils.c
+SRC = $(addprefix ./src/, main.c movements.c parse_map.c gnl.c gnl_utils.c utils.c line_utils.c map_utils.c)
 OBJ = $(SRC:.c=.o)
 
 MLX_DIR = mlx_linux
 MLX = -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
-INCLUDES = -I$(MLX_DIR) -I/usr/include 
+INCLUDES = -I$(MLX_DIR) -I/usr/include  -Iinclude
 LIBFT = -Ilibft -lft -Llibft
 
 all: $(NAME) libft-all
