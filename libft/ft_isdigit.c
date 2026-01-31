@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   workspace.json                                     :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 15:14:17 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/31 15:14:17 by marccost         ###   ########.ch       */
+/*   Created: 2024/10/01 12:24:34 by marccost          #+#    #+#             */
+/*   Updated: 2024/10/01 12:27:27 by marccost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_UTILS_H
-# define MAP_UTILS_H
-
-char	**fullread_fd(int fd);
-#endif
+int	ft_isdigit(int c)
+{
+	return (c <= '9' && c >= '0');
+}

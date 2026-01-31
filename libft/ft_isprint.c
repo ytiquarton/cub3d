@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   workspace.json                                     :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 15:14:17 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/31 15:14:17 by marccost         ###   ########.ch       */
+/*   Created: 2024/10/01 12:34:07 by marccost          #+#    #+#             */
+/*   Updated: 2024/10/22 20:03:15 by marccost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_UTILS_H
-# define MAP_UTILS_H
-
-char	**fullread_fd(int fd);
-#endif
+int	ft_isprint(int c)
+{
+	return (c >= 32 && c <= 126);
+}

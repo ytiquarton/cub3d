@@ -1,17 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   workspace.json                                     :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 15:14:17 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/31 15:14:17 by marccost         ###   ########.ch       */
+/*   Created: 2024/10/01 14:02:32 by marccost          #+#    #+#             */
+/*   Updated: 2024/10/22 22:22:41 by marccost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_UTILS_H
-# define MAP_UTILS_H
+#include <stdlib.h>
+#include "libft.h"
 
-char	**fullread_fd(int fd);
-#endif
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*returnptr;
+
+	returnptr = malloc(count * size);
+	if (!returnptr)
+		return (0);
+	ft_bzero(returnptr, count * size);
+	return (returnptr);
+}

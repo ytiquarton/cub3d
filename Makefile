@@ -8,9 +8,10 @@ OBJ = $(SRC:.c=.o)
 
 MLX_DIR = mlx_linux
 MLX = -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
-INCLUDES = -I$(MLX_DIR) -I/usr/include
+INCLUDES = -I$(MLX_DIR) -I/usr/include 
+LIBFT = -Ilibft -lft -Llibft
 
-all: $(NAME)
+all: $(NAME) libft-all
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -18,10 +19,19 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(MLX) -o $(NAME)
 
-clean:
+libft-clean:
+	$(MAKE) -C libft clean
+libft-fclean:
+	$(MAKE) -C libft fclean
+libft-all:
+	$(MAKE) -C libft all
+
+clean: libft-clean cub3d-clean
+
+cub3d-clean:
 	rm -f $(OBJ)
 
-fclean: clean
+fclean: libft-fclean cub3d-clean
 	rm -f $(NAME)
 
 re: fclean all

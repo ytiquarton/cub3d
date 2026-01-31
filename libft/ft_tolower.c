@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   workspace.json                                     :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 15:14:17 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/31 15:14:17 by marccost         ###   ########.ch       */
+/*   Created: 2024/10/01 13:13:55 by marccost          #+#    #+#             */
+/*   Updated: 2024/10/01 13:17:04 by marccost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_UTILS_H
-# define MAP_UTILS_H
-
-char	**fullread_fd(int fd);
-#endif
+int	ft_tolower(int c)
+{
+	return (c + ('a' - 'A') * (c <= 'Z' && c >= 'A'));
+}
