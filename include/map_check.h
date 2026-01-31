@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.h                                        :+:      :+:    :+:   */
+/*   map_check.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 16:38:54 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/31 16:38:54 by marccost         ###   ########.ch       */
+/*   Created: 2026/01/31 16:47:26 by marccost          #+#    #+#             */
+/*   Updated: 2026/01/31 16:47:37 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_UTILS_H
-# define MAP_UTILS_H
-# include <aio.h>
+#ifndef MAP_CHECK_H
+# define MAP_CHECK_H
+# include "cub3d.h"
 
-char	**fullread_fd(int fd);
-void	free_strs(char **strs);
-void	*zalloc(size_t size);
+int	check_map(char **map, t_pos player);
 #endif

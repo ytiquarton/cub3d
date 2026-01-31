@@ -3,8 +3,9 @@ NAME = cubtest
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 
-SRC = $(addprefix ./src/, main.c movements.c parse_map.c gnl.c gnl_utils.c utils.c line_utils.c map_utils.c)
-OBJ = $(SRC:.c=.o)
+SRC_NAMES = main.c movements.c parse_map.c gnl.c gnl_utils.c utils.c line_utils.c map_utils.c map_check.c
+SRC = $(addprefix ./src/, $(SRC_NAMES))
+OBJ = $(addprefix ./obj/, $(SRC_NAMES:.c=.o))
 
 MLX_DIR = mlx_linux
 MLX = -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
@@ -13,7 +14,7 @@ LIBFT = -Ilibft -lft -Llibft
 
 all: $(NAME) libft-all
 
-%.o: %.c
+./obj/%.o: ./src/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJ)

@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   workspace.json                                     :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 15:38:01 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/31 15:38:07 by marccost         ###   ########.ch       */
+/*   Created: 2026/01/31 16:45:55 by marccost          #+#    #+#             */
+/*   Updated: 2026/01/31 16:47:08 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "map_utils.h"
+#include "map_check.h"
 
 char	**add_one_malloc(char **tab)
 {
@@ -33,13 +34,13 @@ char	**add_one_malloc(char **tab)
 
 int	init_map(int fd, t_data *game)
 {
+	t_pos	player;
 	int		y;
 
 	y = 0;
 	game->map.map = fullread_fd(fd);
-	if (!game->map.map)
+	if (!game->map.map || check_map(game->map.map, player))
 		return (0);
-	
 	game->map.size_map[1] = y;
 	game->map.size_map[0] = ft_strlen(game->map.map[0]) - 1;
 	return (1);
@@ -48,8 +49,8 @@ int	init_map(int fd, t_data *game)
 
 void	draw_block(int x, int y, int tile_w, int tile_h, t_data *game)
 {
-	int	i = 0;
-	int	j;
+	int i = 0;
+	int j;
 
 	while (i < tile_w)
 	{
@@ -75,7 +76,7 @@ void	draw_map(char *name, t_data *game)
 
 	fd = open(name, O_RDONLY);
 	if (fd < 0)
-		return;
+		return ;
 	init_map(fd, game);
 	tile_w = 1920 / game->map.size_map[0];
 	tile_h = 1080 / game->map.size_map[1];

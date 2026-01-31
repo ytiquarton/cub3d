@@ -46,6 +46,12 @@ typedef struct s_data
 
 }               t_data;
 
+typedef struct s_pos
+{
+	int	x;
+	int	y;
+}				t_pos;
+
 void move_right(t_data *game);
 void move_rear(t_data *game);
 void move_left(t_data *game);
