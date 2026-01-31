@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 16:45:55 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/31 16:47:08 by marccost         ###   ########.ch       */
+/*   Created: 2026/01/31 17:34:42 by marccost          #+#    #+#             */
+/*   Updated: 2026/01/31 17:44:29 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,34 @@ char	**add_one_malloc(char **tab)
 	return (copy);
 }
 
+int	longest_str_len(char **strs)
+{
+	int	output;
+
+	output = 0;
+	while (*strs)
+	{
+		if (output < ft_strlen(*strs))
+			output = ft_strlen(*strs);
+		strs++;
+	}
+	return (output);
+}
+
+int	format_map(char ***map)
+{
+	char	**output;
+	size_t	index;
+
+	output = zalloc(sizeof(char *) * ft_tablen(*map));
+	if (!output)
+		return (0);
+	index = 0;
+	while (*map[index])
+	{
+		index ++;
+	}
+}
 
 int	init_map(int fd, t_data *game)
 {
