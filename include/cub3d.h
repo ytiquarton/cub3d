@@ -58,7 +58,7 @@ void move_left(t_data *game);
 void move_front(t_data *game);
 void vanish_player(t_data *game);
 void my_mlx_pixel_put(t_windata *data, int x, int y, int color);
-void draw_map(char *name, t_data *game);
+int draw_map(char *name, t_data *game);
 void update_map(t_data *game);
 int is_in_block(int x, int y, t_data *game);
 

@@ -211,7 +211,8 @@ int main(void)
 	game.windata.img = mlx_new_image(game.mlx.mlx, 1920, 1080);
 	game.windata.addr = mlx_get_data_addr(game.windata.img, &game.windata.bpp, &game.windata.line_length, &game.windata.endian); //code pour set les variable en fonction de la taille de l'image
 	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, 1920, 1080, "test");
-	draw_map("map.txt", &game);
+	if (!draw_map("map.txt", &game))
+		return (42);
 	init_player(&game);
 	draw_player(&game);
 	draw_line_player(&game);

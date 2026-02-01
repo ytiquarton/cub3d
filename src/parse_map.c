@@ -136,7 +136,7 @@ void	draw_block(int x, int y, int tile_w, int tile_h, t_data *game)
 
 
 
-void	draw_map(char *name, t_data *game)
+int	draw_map(char *name, t_data *game)
 {
 	int fd;
 	int i;
@@ -146,8 +146,10 @@ void	draw_map(char *name, t_data *game)
 
 	fd = open(name, O_RDONLY);
 	if (fd < 0)
-		return ;
-	init_map(fd, game);
+		return (0);
+	if (!init_map(fd, game))
+		return (close(fd), 0);
+	close(fd);
 	tile_w = 1920 / game->map.size_map[0];
 	tile_h = 1080 / game->map.size_map[1];
 	i = 0;
@@ -164,4 +166,5 @@ void	draw_map(char *name, t_data *game)
 	}
 	game->player.posx = game->player.posx * tile_w + tile_w / 2;
 	game->player.posy = game->player.posy * tile_h + tile_h / 2;
+	return (1);
 }
