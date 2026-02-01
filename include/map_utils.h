@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 16:38:54 by marccost          #+#    #+#             */
 /*   Updated: 2026/01/31 16:38:54 by marccost         ###   ########.ch       */

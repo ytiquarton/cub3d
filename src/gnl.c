@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "gnl.h"
+#include "libft.h"
 
 char	*extract_line(char **storage)
 {
@@ -35,6 +36,7 @@ int	read_to_storage(int fd, char **storage)
 {
 	char	*buf;
 	int		bytes_read;
+	char	*temp;
 
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
@@ -46,7 +48,9 @@ int	read_to_storage(int fd, char **storage)
 		return (-1);
 	}
 	buf[bytes_read] = '\0';
-	*storage = ft_strjoin(*storage, buf);
+	temp = ft_strjoin(*storage, buf);
+	free(*storage);
+	*storage = temp;
 	free(buf);
 	return (bytes_read);
 }

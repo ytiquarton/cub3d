@@ -14,6 +14,7 @@
 #include "gnl.h"
 #include "cub3d.h"
 #include "map_utils.h"
+#include "libft.h"
 
 char	**ft_strsdup(char **src)
 {

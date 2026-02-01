@@ -1,6 +1,6 @@
 NAME := libft.a
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -I.
+CFLAGS := -Wall -Wextra -Werror -g -I.
 INCLUDES := includes
 SRC_DIR := .
 OBJ_DIR := .

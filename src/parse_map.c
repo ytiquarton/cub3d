@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 17:34:42 by marccost          #+#    #+#             */
 /*   Updated: 2026/01/31 17:44:29 by marccost         ###   ########.ch       */
@@ -13,6 +13,7 @@
 #include "cub3d.h"
 #include "map_utils.h"
 #include "map_check.h"
+#include "libft.h"
 
 char	**add_one_malloc(char **tab)
 {
@@ -45,32 +46,71 @@ int	longest_str_len(char **strs)
 	return (output);
 }
 
-int	format_map(char ***map)
+char	*format_row(char *original, int length)
 {
-	char	**output;
-	size_t	index;
+	char	*output;
+	int		index;
+	char	original_end;
 
-	output = zalloc(sizeof(char *) * ft_tablen(*map));
+	output = zalloc(sizeof(char) * (length + 1));
 	if (!output)
 		return (0);
 	index = 0;
-	while (*map[index])
+	original_end = 0;
+	while (index < length)
 	{
+		if (!original_end && original[index] == '1')
+			output[index] = '1';
+		else
+			output[index] = '0';
+		if (!original[index])
+			original_end = 1;
 		index ++;
 	}
+	return (output);
+}
+
+t_pos	*format_map(char ***map)
+{
+	char	**output;
+	size_t	index;
+	t_pos	*size;
+
+	size = zalloc(sizeof(t_pos));
+	if (!size)
+		return ((t_pos *)0);
+	size->x = longest_str_len(*map);
+	size->y = ft_tablen(*map);
+	output = zalloc(sizeof(char *) * size->y);
+	if (!output)
+		return (free(size), (t_pos *)0);
+	index = 0;
+	while ((*map)[index])
+	{
+		output[index] = format_row((*map)[index], size->x);
+		if (!output[index])
+			return (free(size), free_strs(output), (t_pos *)0);
+		index ++;
+	}
+	free_strs(*map);
+	*map = output;
+	return (size);
 }
 
 int	init_map(int fd, t_data *game)
 {
 	t_pos	player;
-	int		y;
+	t_pos	*map_size;
 
-	y = 0;
 	game->map.map = fullread_fd(fd);
 	if (!game->map.map || check_map(game->map.map, player))
-		return (0);
-	game->map.size_map[1] = y;
-	game->map.size_map[0] = ft_strlen(game->map.map[0]) - 1;
+		return (free_strs(game->map.map), 0);
+	map_size = format_map(&game->map.map);
+	if (!map_size)
+		return (free_strs(game->map.map), 0);
+	game->map.size_map[1] = map_size->y;
+	game->map.size_map[0] = map_size->x;
+	free(map_size);
 	return (1);
 }
 

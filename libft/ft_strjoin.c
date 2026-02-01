@@ -35,11 +35,15 @@ static void	fillstr(char *dest, int size, char **strs, char *sep)
 	index = 0;
 	while (index < size - 1)
 	{
-		catptr = ft_strcpy(catptr, strs[index]);
-		catptr = ft_strcpy(catptr, sep);
+		if (strs[index])
+		{
+			catptr = ft_strcpy(catptr, strs[index]);
+			catptr = ft_strcpy(catptr, sep);
+		}
 		index ++;
 	}
-	catptr = ft_strcpy(catptr, strs[index]);
+	if (strs[index])
+		catptr = ft_strcpy(catptr, strs[index]);
 	*catptr = 0;
 }
 
@@ -55,7 +59,8 @@ static char	*ft_strsjoin(int size, char **strs, char *sep)
 	index = 0;
 	while (index < size)
 	{
-		output_size += ft_strlen(strs[index]);
+		if (strs[index])
+			output_size += ft_strlen(strs[index]);
 		index ++;
 	}
 	output_size += (size - 1) * ft_strlen(sep) + 1;
