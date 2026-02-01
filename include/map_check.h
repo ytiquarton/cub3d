@@ -14,5 +14,5 @@
 # define MAP_CHECK_H
 # include "cub3d.h"
 
-int	check_map(char **map, t_pos player);
+int	check_map(char **map, t_pos *player);
 #endif

@@ -39,7 +39,7 @@ int	check_chars(char **map, t_pos *player_pos)
 {
 	size_t	index1;
 	size_t	index2;
-	int		playerfound;
+	char	playerfound;
 
 	index1 = 0;
 	playerfound = 0;
@@ -54,13 +54,13 @@ int	check_chars(char **map, t_pos *player_pos)
 				player_pos->y = index1;
 				player_pos->x = index2;
 			}
-			if (!ft_strchr("10\n ", map[index1][index2]))
+			else if (!ft_strchr("10\n ", map[index1][index2]))
 				return (0);
 			index2++;
 		}
 		index1 ++;
 	}
-	return (playerfound);
+	return ((int)playerfound);
 }
 
 int	check_closed_map(char **map, int x, int y)

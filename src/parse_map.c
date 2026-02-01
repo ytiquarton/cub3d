@@ -103,7 +103,7 @@ int	init_map(int fd, t_data *game)
 	t_pos	*map_size;
 
 	game->map.map = fullread_fd(fd);
-	if (!game->map.map || check_map(game->map.map, player))
+	if (!game->map.map || !check_map(game->map.map, &player))
 		return (free_strs(game->map.map), 0);
 	map_size = format_map(&game->map.map);
 	if (!map_size)
@@ -111,6 +111,8 @@ int	init_map(int fd, t_data *game)
 	game->map.size_map[1] = map_size->y;
 	game->map.size_map[0] = map_size->x;
 	free(map_size);
+	game->player.posx = player.x;
+	game->player.posy = player.y;
 	return (1);
 }
 
@@ -156,14 +158,10 @@ void	draw_map(char *name, t_data *game)
 		{
 			if (game->map.map[i][j] == '1')
 				draw_block(j * tile_w, i * tile_h, tile_w, tile_h, game);
-
-			if (game->map.map[i][j] == 'P')
-			{
-				game->player.posx = j * tile_w + tile_w / 2;
-				game->player.posy = i * tile_h + tile_h / 2;
-			}
 			j++;
 		}
 		i++;
 	}
+	game->player.posx = game->player.posx * tile_w + tile_w / 2;
+	game->player.posy = game->player.posy * tile_h + tile_h / 2;
 }
