@@ -47,7 +47,7 @@ void draw_walls(t_data *game)
 		{
 			if (is_in_block(x, y, game))
             {
-				draw_one_wall(game, front_pix, (int) line);
+				draw_one_wall(game, front_pix, (int)20 - line);
                 break;
             }
 			x += cos(game->player.angle + (line / 35.0f));
@@ -84,3 +84,4 @@ void draw_walls(t_data *game)
 }
 
 // faire la fonction pour voir lintersection plus rapidement avec calcul des droites (voir dessins)
+
