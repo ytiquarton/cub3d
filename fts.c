@@ -85,3 +85,30 @@ void draw_walls(t_data *game)
 
 // faire la fonction pour voir lintersection plus rapidement avec calcul des droites (voir dessins)
 
+int intersect_x(t_data *game, float slope, float shift)
+{
+	
+}
+
+int intersect_y(t_data *game, float slope, float shift)
+{
+	float x;
+
+	while ()
+}
+
+int check_if_intersect(t_data *game, float pos[2])
+{
+	
+}
+
+int *intersect(t_data *game, float dx_dy[2])
+{
+	int pos_int[2];
+	float slope;
+	float shift;
+
+	slope = dx_dy[0] / dx_dy[1];
+	shift = -1 * (slope * game->player.posx - game->player.posy);
+	
+}
