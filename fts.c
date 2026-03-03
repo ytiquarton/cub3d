@@ -83,32 +83,121 @@ void draw_walls(t_data *game)
 	}
 }
 
+void check_orientation_x(t_data *game, int *pos_inter)
+{
+	if ((pos_inter[1] - game->player.posy) > 0)
+		pos_inter[2] = 0; //NORD
+	pos_inter[2] = 1; //SUD
+}
+
+void check_orientation_y(t_data *game, int *pos_inter)
+{
+	if ((pos_inter[0] - game->player.posx) > 0)
+		pos_inter[2] = 3; //OUEST
+	pos_inter[2] = 2; //EST
+
+}
+
+int check_nearest(t_data *game, int *pos_inter, float x, float y)
+{
+	if (fabs((pos_inter[0] - game->player.posx) + (pos_inter[1] - game->player.posy)) < fabs((x - game->player.posx) + (y - game->player.posy)))
+		return (1);
+	else
+	{
+		pos_inter[0] = x;
+		pos_inter[1] = y;
+		check_orientation_y(game, pos_inter);
+		return (2);
+	}
+}
+
+int check_if_intersect(t_data *game, int x, float y)
+{
+	int int_y;
+
+	int_y = (int) y;
+	if (game->map.map[x][int_y] == 1)
+	{
+		return (1);
+	}
+	return (0);
+
+}
+
 // faire la fonction pour voir lintersection plus rapidement avec calcul des droites (voir dessins)
 
-int intersect_x(t_data *game, float slope, float shift)
+int *intersect_x(t_data *game, float slope, float shift, int *pos_inter)
 {
-	
-}
-
-int intersect_y(t_data *game, float slope, float shift)
-{
+	float y;
 	float x;
 
-	while ()
+	x = 0;
+	y = (slope * x) + shift;
+	while (check_if_intersect(game, x, y) != 1)
+	{
+		x++;
+		y = (slope * x) + shift;
+	}
+	if (x == game->map.size_map[1] - 1)
+		return (NULL);
+	else
+	{
+		pos_inter[0] = x;
+		pos_inter[1] = y;
+		check_orientation_x(game, pos_inter);
+		return (pos_inter);
+	}
+	
 }
 
-int check_if_intersect(t_data *game, float pos[2])
+int* intersect_y(t_data *game, float slope, float shift, int *pos_inter)
 {
-	
+	float x;
+	float y;
+
+	y = 0;
+	x = (y - shift) / slope;
+	while (check_if_intersect(game, x, y) != 1)
+	{
+		y++;
+		x = (y - shift) / slope;
+	}
+	if (y == game->map.size_map[0] - 1)
+		return (NULL);
+	else
+	{
+		check_nearest(game, pos_inter, x, y);// si 1 = intersectx est plus proche si 2 = intersect y
+		return (pos_inter);
+	}
 }
 
 int *intersect(t_data *game, float dx_dy[2])
 {
-	int pos_int[2];
+	int* pos_inter; // [0] = x, [1] = y, [2] = face du mur (nord sudt est ouest) 0 = nord 1 = sud 2 = est 3 = ouest
 	float slope;
 	float shift;
 
+	pos_inter = malloc (3 * sizeof(int)); // SECURISER LE MALLOC
+	if (!pos_inter)
+		return (NULL);
 	slope = dx_dy[0] / dx_dy[1];
-	shift = -1 * (slope * game->player.posx - game->player.posy);
-	
+	shift = game->player.posy -  (slope * game->player.posx);
+	intersect_x(game, slope, shift, pos_inter);
+	if (intersect_x(game, slope, shift, pos_inter) == NULL)
+		return NULL;
+	if (intersect_y(game, slope, shift, pos_inter) == NULL)
+		return NULL;
+	return (pos_inter);
 }
+
+/*
+
+fonction pour trouver x : (y - b) / a = x
+
+fonction pour trouver y : ax + b = y (forme canonique)
+
+fonction pour trouver décalage :  b = y - ax
+
+fonction pour trouver pente : a = dx/dy
+
+*/

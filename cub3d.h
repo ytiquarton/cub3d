@@ -60,6 +60,8 @@ void update_map(t_data *game);
 int is_in_block(int x, int y, t_data *game);
 // void init_map(char *name, t_data *game);
 void draw_walls(t_data *game);
+int *intersect(t_data *game, float dx_dy[2]);
+
 
 int draw_sky_g(t_data *game);
 
