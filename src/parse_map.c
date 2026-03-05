@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 17:34:42 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/31 17:44:29 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/06 00:00:25 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/06 00:02:15 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "map_utils.h"
 #include "map_check.h"
 #include "libft.h"
+#include "file_utils.h"
+#include "parse_assets.h"
+#include "utils.h"
 
 char	**add_one_malloc(char **tab)
 {
@@ -21,7 +24,7 @@ char	**add_one_malloc(char **tab)
 	int		i;
 
 	i = 0;
-	copy = malloc((ft_tablen(tab) + 2) * sizeof(char *));
+	copy = malloc((ft_strslen(tab) + 2) * sizeof(char *));
 	while (tab[i])
 	{
 		copy[i] = tab[i];
@@ -97,12 +100,17 @@ t_pos	*format_map(char ***map)
 	return (size);
 }
 
-int	init_map(int fd, t_data *game)
+int	init_map(char *filename, t_data *game)
 {
 	t_pos	player;
 	t_pos	*map_size;
+	int		fd;
 
-	game->map.map = fullread_fd(fd);
+	if (access(filename, R_OK) || !has_extension(filename, ".cub"))
+		return (0);
+	fd = open(filename, O_RDONLY);
+	game->map.map = parse_assets(fullread_fd(fd), &game->assets);
+	close(fd);
 	if (!game->map.map || !check_map(game->map.map, &player))
 		return (free_strs(game->map.map), 0);
 	map_size = format_map(&game->map.map);
@@ -138,18 +146,13 @@ void	draw_block(int x, int y, int tile_w, int tile_h, t_data *game)
 
 int	draw_map(char *name, t_data *game)
 {
-	int fd;
 	int i;
 	int j;
 	int tile_w;
 	int tile_h;
 
-	fd = open(name, O_RDONLY);
-	if (fd < 0)
+	if (!init_map(name, game))
 		return (0);
-	if (!init_map(fd, game))
-		return (close(fd), 0);
-	close(fd);
 	tile_w = 1920 / game->map.size_map[0];
 	tile_h = 1080 / game->map.size_map[1];
 	i = 0;

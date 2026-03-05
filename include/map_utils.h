@@ -16,5 +16,6 @@
 
 char	**fullread_fd(int fd);
 void	free_strs(char **strs);
+size_t	strs_len(char **strs);
 void	*zalloc(size_t size);
 #endif

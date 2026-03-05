@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/03 20:18:57 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/03 20:18:57 by marccost         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "libft.h"
 #include "cub3d.h"
 
-int ft_tablen(char **tab)
+int	ft_tablen(char **tab)
 {
     int i;
 
@@ -11,8 +23,7 @@ int ft_tablen(char **tab)
     return (i);
 }
 
-
-int is_in_block(int x, int y, t_data *game)
+int	is_in_block(int x, int y, t_data *game)
 {
     int tile_w;
     int tile_h;
@@ -34,4 +45,24 @@ int is_in_block(int x, int y, t_data *game)
     if (game->map.map[row][col] == '1')
         return (1);
     return (0);
+}
+
+int	is_valid_num(char *str)
+{
+	size_t	index;
+
+	index = 0;
+	while (str[index] == ' ')
+		index++;
+	if (str[index] == '-' || str[index] == '+')
+		index++;
+	if (!str[index])
+		return (0);
+	while (str[index])
+	{
+		if (!ft_isdigit(str[index]))
+			return (0);
+		index++;
+	}
+	return (1);
 }

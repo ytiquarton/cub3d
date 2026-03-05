@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+      */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 12:42:19 by aloubry           #+#    #+#             */
-/*   Updated: 2025/04/03 16:32:51 by marccost         ###   ########.fr       */
+/*   Created: 2026/03/05 23:56:12 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/05 23:56:34 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static int	ft_strslen(char **str)
+int	ft_strslen(char **str)
 {
 	int	len;
 
@@ -45,6 +45,19 @@ char *endptr, char **str_array)
 	return (1);
 }
 
+static void	free_strs(char **strs)
+{
+	size_t	index;
+
+	index = 0;
+	while (strs[index])
+	{
+		free(strs[index]);
+		index++;
+	}
+	free(strs);
+}
+
 char	**ft_split(char const *str, char c)
 {
 	char	**output;
@@ -64,7 +77,7 @@ char	**ft_split(char const *str, char c)
 			if (current_ptr - last_ptr > 1)
 			{
 				if (!add_str_to_str_array(last_ptr + 1, current_ptr, output))
-					return (0);
+					return (free_strs(output), (char **)0);
 			}
 			last_ptr = current_ptr;
 		}

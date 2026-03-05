@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 16:48:21 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/31 16:48:55 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/06 00:02:33 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/06 00:02:33 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "cub3d.h"
 #include "map_utils.h"
 #include "libft.h"
+#include "utils.h"
 
 char	**ft_strsdup(char **src)
 {

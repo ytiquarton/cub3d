@@ -1,4 +1,5 @@
 #include "cub3d.h"
+#include "utils.h"
 
 # define ROV 1000
 
@@ -88,7 +89,7 @@ void vanish_line(t_data *game)
 		while (front_pix < ROV)
 		{
 			if (is_in_block(x, y, game))
-				break;
+				break ;
 			my_mlx_pixel_put(&game->windata, x, y, 0x00000000);
 			x += cos(game->player.angle + (line / 35.0f));
 			y += sin(game->player.angle + (line / 35.0f));
@@ -187,14 +188,14 @@ int move_player (int keycode, t_data *game)
 	else if (keycode == 65363)
 	{
 		game->player.angle += 0.1;
-		if (game->player.angle > 2 * pi)
-			game->player.angle -= 2 * pi;
+		if (game->player.angle > 2 * PI)
+			game->player.angle -= 2 * PI;
 	}
 	else if (keycode == 65361)
 	{
 		game->player.angle -= 0.1;
 		if (game->player.angle < 0)
-			game->player.angle += 2 * pi;
+			game->player.angle += 2 * PI;
 	}
 	else
 		printf("keycode = %d\n", keycode);
@@ -203,16 +204,18 @@ int move_player (int keycode, t_data *game)
 	return (0);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_data		game;
 
+	if (argc != 2)
+		return (1);
 	game.mlx.mlx = mlx_init();
 	game.windata.img = mlx_new_image(game.mlx.mlx, 1920, 1080);
 	game.windata.addr = mlx_get_data_addr(game.windata.img, &game.windata.bpp, &game.windata.line_length, &game.windata.endian); //code pour set les variable en fonction de la taille de l'image
 	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, 1920, 1080, "test");
-	if (!draw_map("map.txt", &game))
-		return (42);
+	if (!draw_map(argv[1], &game))
+		return (1);
 	init_player(&game);
 	draw_player(&game);
 	draw_line_player(&game);
