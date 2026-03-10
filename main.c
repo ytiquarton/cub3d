@@ -45,7 +45,7 @@ int move_player (int keycode, t_data *game)
 {
 	// update_map(game);
 	// vanish_line(game);
-	print_useful(game);
+	// print_useful(game);
 	if (keycode == 'w')
 		move_front(game);
 	else if (keycode == 'a')
@@ -69,7 +69,7 @@ int move_player (int keycode, t_data *game)
 			game->player.angle += 2 * pi;
 	}
 	else
-		printf("keycode = %d\n", keycode);
+	printf("keycode = %d\n", keycode);
 	mlx_clear_window(game->mlx.mlx, game->mlx.mlx_win);
 	draw_sky_g(game);
 	draw_walls(game);
@@ -89,12 +89,12 @@ int main(void)
 	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, WIN_X, WIN_Y, "test");
 	draw_map("map.txt", &game);
 	// init_map("map.txt", &game);
-	print_useful(&game);
 	init_player(&game);
+	// print_useful(&game);
 	// draw_player(&game);
 	draw_sky_g(&game);
 	draw_walls(&game);
-	print_useful(&game);
+	// print_useful(&game);
 	mlx_put_image_to_window(game.mlx.mlx, game.mlx.mlx_win, game.windata.img, 0, 0);
 	mlx_hook(game.mlx.mlx_win, 2, 1L<<0, move_player, &game);
 	mlx_loop(game.mlx.mlx);

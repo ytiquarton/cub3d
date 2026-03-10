@@ -89,15 +89,11 @@ void draw_map(char *name, t_data *game)
     int fd;
     int i;
     int j;
-    int tile_w;
-    int tile_h;
 
     fd = open(name, O_RDONLY);
     if (fd < 0)
         return;
     init_map(fd, game);
-    tile_w = 1920 / game->map.size_map[0];
-    tile_h = 1080 / game->map.size_map[1];
     i = 0;
     while (i < game->map.size_map[1])
     {
@@ -106,8 +102,8 @@ void draw_map(char *name, t_data *game)
         {
             if (game->map.map[i][j] == 'P')
             {
-                game->player.posx = j * tile_w + tile_w / 2;
-                game->player.posy = i * tile_h + tile_h / 2;
+                game->player.posx = (float) j + 0.5f;
+                game->player.posy = (float) i + 0.5f;
             }
             j++;
         }

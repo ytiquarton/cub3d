@@ -20,8 +20,9 @@ int	main(void)
 	// mlx_hook(vars.win, 2, 1L<<0, close, &vars);
 	// mlx_loop(vars.mlx);
 	float n;
+	int	a;
 
 	n = 1.2;
-	n = n / 1;
-	printf("%f\n", n);
+	a = (int) n;
+	printf("%d\n", a);
 }
