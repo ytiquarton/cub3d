@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-#define NOLINE 30
+#define NOLINE WIN_X
 
 void draw_one_wall(t_data *game, int height, int pos)
 {
@@ -439,13 +439,16 @@ void draw_walls(t_data *game)
 	double rayDirY;
 	int i;
 	double fov = pi / 3.0; /* 60 degrees */
+	double camera_offset;
+	double rayAngle;
+	double perpDist;
 
 	i = 0;
 	while (i < NOLINE)
 	{
 		/* compute a ray per column by offsetting the player's angle */
-		double camera_offset = ((double)i - (double)NOLINE / 2.0) / (double)NOLINE; /* roughly -0.5..+0.5 */
-		double rayAngle = game->player.angle + camera_offset * fov;
+		camera_offset = ((double)i - (double)NOLINE / 2.0) / (double)NOLINE; /* roughly -0.5..+0.5 */
+		rayAngle = game->player.angle + camera_offset * fov;
 		rayDirX = cos(rayAngle);
 		rayDirY = sin(rayAngle);
 		vars = raycast(game, rayDirX, rayDirY);
@@ -461,7 +464,7 @@ void draw_walls(t_data *game)
 		draw_one_wall(game, lineHeight, i);
 		i++;
 	}
-	/* debug: you can uncomment the next line for a single summary print */
-	/* printf("last vars.dist = %lf, vars.side = %d, vars.wallX = %lf\n", vars.dist, vars.side, vars.wallX); */
+	// debug: you can uncomment the next line for a single summary print
+	printf("last vars.dist = %lf, vars.side = %d, vars.wallX = %lf\n", vars.dist, vars.side, vars.wallX);
 }
 
