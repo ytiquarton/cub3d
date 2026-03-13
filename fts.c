@@ -286,22 +286,22 @@ typedef struct s_ray
 {
 	double	rayDirX;
 	double	rayDirY;
-	double	sideDistX;
+	double	sideDistX; // distance jusqu'a la prochaine case
 	double	sideDistY;
-	double	deltaDistX;
+	double	deltaDistX; // dist pour passer d'une case à la suivante
 	double	deltaDistY;
-	int		mapX;
+	int		mapX; //position du rayon dans la map
 	int		mapY;
-	int		stepX;
+	int		stepX; // direction du deplacement
 	int		stepY;
-	int		side;
+	int		side; // mur vertical ou horizontal
 }	t_ray;
 
 typedef struct s_hit
 {
-	double	dist;
-	double	wallX;
-	int		side;
+	double	dist; // distance joueur/mur
+	double	wallX; // position sur le mur
+	int		side; // direction
 }	t_hit;
 
 void	init_map_pos(t_data *game, t_ray *ray) // initier la position dans la map
@@ -310,7 +310,7 @@ void	init_map_pos(t_data *game, t_ray *ray) // initier la position dans la map
 	ray->mapY = (int)game->player.posy;
 }
 
-void	init_delta(t_ray *ray) // calcul delta de la distance
+void	init_delta(t_ray *ray) // calcul delta de la distance (entre ligne de grille)
 {
 	/* protect against zero ray direction components */
 	if (ray->rayDirX == 0)
@@ -357,7 +357,7 @@ void	init_step_y(t_data *game, t_ray *ray) // initialisation de step y
 
 void	dda_step(t_ray *ray) // avancer d'une case dans la grille 
 {
-	if (ray->sideDistX < ray->sideDistY)
+	if (ray->sideDistX < ray->sideDistY) // si touche vertical avant
 	{
 		ray->sideDistX += ray->deltaDistX;
 		ray->mapX += ray->stepX;
@@ -376,7 +376,7 @@ void	perform_dda(t_data *game, t_ray *ray) // boucle dda
 	int	hit;
 
 	hit = 0;
-	while (!hit)
+	while (hit == 0)
 	{
 		dda_step(ray);
 		/* guard against stepping outside the map bounds */
@@ -422,7 +422,8 @@ t_hit	raycast(t_data *game, double rayDirX, double rayDirY)
 
 	ray.rayDirX = rayDirX;
 	ray.rayDirY = rayDirY;
-	init_map_pos(game, &ray);
+	ray.mapX = (int)game->player.posx;
+	ray.mapY = (int) game->player.posy;
 	init_delta(&ray);
 	init_step_x(game, &ray);
 	init_step_y(game, &ray);
