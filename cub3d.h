@@ -49,6 +49,29 @@ typedef struct s_data
 
 }               t_data;
 
+typedef struct s_hit // structure pour les infos du mur touche
+{
+	double	dist; // distance joueur/mur
+	double	wallX; // position sur le mur
+	int		side; // direction
+	int		height; // hauteur du mur
+}	t_hit;
+
+typedef struct s_ray //structure pour les rayons du dda
+{
+	double	rayDirX;
+	double	rayDirY;
+	double	sideDistX; // distance jusqu'a la prochaine case
+	double	sideDistY;
+	double	deltaDistX; // dist pour passer d'une case à la suivante
+	double	deltaDistY;
+	int		mapX; //position du rayon dans la map
+	int		mapY;
+	int		stepX; // direction du deplacement
+	int		stepY;
+	int		side; // mur vertical ou horizontal
+}	t_ray;
+
 void move_right(t_data *game);
 void move_rear(t_data *game);
 void move_left(t_data *game);
