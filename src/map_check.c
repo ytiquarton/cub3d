@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 00:02:33 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/06 00:02:33 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/08 21:53:46 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/08 21:53:46 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	check_closed_map(char **map, int x, int y)
 
 int	check_map(char **map, t_pos *player)
 {
-
 	map = ft_strsdup(map);
 	if (!map)
 		return (0);

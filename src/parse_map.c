@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 00:00:25 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/06 00:02:15 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/08 21:56:38 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/09 13:53:23 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,13 @@ int	init_map(char *filename, t_data *game)
 	t_pos	player;
 	t_pos	*map_size;
 	int		fd;
+	char	**temp;
 
 	if (access(filename, R_OK) || !has_extension(filename, ".cub"))
-		return (0);
+		return (ft_putstr_fd("Invalid filename\n", 2), 0);
 	fd = open(filename, O_RDONLY);
-	game->map.map = parse_assets(fullread_fd(fd), &game->assets);
+	temp = fullread_fd(fd);
+	game->map.map = parse_assets(temp, &game->assets);
 	close(fd);
 	if (!game->map.map || !check_map(game->map.map, &player))
 		return (free_strs(game->map.map), 0);

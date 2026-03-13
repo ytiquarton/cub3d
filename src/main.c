@@ -1,5 +1,6 @@
 #include "cub3d.h"
 #include "utils.h"
+#include "libft.h"
 
 # define ROV 1000
 
@@ -209,7 +210,7 @@ int main(int argc, char **argv)
 	t_data		game;
 
 	if (argc != 2)
-		return (1);
+		return (ft_putstr_fd("Wrong number of arguments!\n", 2), 1);
 	game.mlx.mlx = mlx_init();
 	game.windata.img = mlx_new_image(game.mlx.mlx, 1920, 1080);
 	game.windata.addr = mlx_get_data_addr(game.windata.img, &game.windata.bpp, &game.windata.line_length, &game.windata.endian); //code pour set les variable en fonction de la taille de l'image

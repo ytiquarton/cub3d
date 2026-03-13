@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 23:58:06 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/05 23:59:12 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/08 21:55:48 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/08 21:55:48 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**parse_assets(char	**lines, t_assets *assets)
 			break ;
 		lines++;
 	}
-	if (check_loaded_assets(assets))
+	if (!check_loaded_assets(assets))
 		return (free_assets(assets), (char **)0);
 	return (lines);
 }

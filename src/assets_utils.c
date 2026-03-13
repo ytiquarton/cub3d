@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 23:47:12 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/05 23:47:16 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/08 21:54:31 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/08 21:55:41 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "libft.h"
 
 int	in_range(int min, int max, int x)
 {
