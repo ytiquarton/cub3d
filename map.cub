@@ -1,7 +1,7 @@
-NO ./map.cub
-SO ./map.cub
-WE ./map.cub
-EA ./map.cub
+NO ./assets/east.xpm
+SO ./assets/east.xpm
+WE ./assets/east.xpm
+EA ./assets/east.xpm
 
 
 F 220,10,0

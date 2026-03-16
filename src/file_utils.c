@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 23:59:23 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/05 23:59:23 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/16 18:00:13 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/16 18:00:16 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ char	*get_file_extension(char *file)
 	return (0);
 }
 
-int		has_extension(char *file, char *extension)
+int	has_extension(char *file, char *extension)
 {
-	char *file_extension;
+	char	*file_extension;
 
 	file_extension = get_file_extension(file);
 	if (!file_extension)

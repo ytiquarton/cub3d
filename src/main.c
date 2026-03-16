@@ -79,9 +79,9 @@ int main(int argc, char **argv)
 	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, WIN_X, WIN_Y, "test");
 	if (!draw_map(argv[1], &game))
 		return (1);
-	if (load_texture(&game, &game.assets.n_texture, "./assets/north.xpm") || load_texture(&game, &game.assets.s_texture, "./assets/south.xpm") ||
-	load_texture(&game, &game.assets.e_texture, "./assets/east.xpm") ||
-	load_texture(&game, &game.assets.w_texture, "./assets/west.xpm"))
+	if (load_texture(&game, &game.assets.n_texture) || load_texture(&game, &game.assets.s_texture) ||
+	load_texture(&game, &game.assets.e_texture) ||
+	load_texture(&game, &game.assets.w_texture))
 		return (-1);
 
 	draw_map("map.txt", &game);

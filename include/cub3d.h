@@ -124,7 +124,7 @@ float *intersect(t_data *game, float dx_dy[2]);
 
 
 int		draw_sky_g(t_data *game);
-int		load_texture(t_data *game, t_texture *tex, char *path);
+int		load_texture(t_data *game, t_texture *tex);
 void	draw_textured_wall(t_data *game, t_hit hit, int x, int lineHeight);
 
 void	init_delta(t_ray *ray);

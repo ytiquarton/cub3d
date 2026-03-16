@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 17:31:53 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/16 17:32:20 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/16 18:00:33 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/16 18:01:39 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "map_utils.h"
 #include "utils.h"
 #include "assets_utils.h"
+#include "file_utils.h"
 
 t_vector3	*parse_vector3(char *str)
 {
@@ -41,7 +42,13 @@ t_vector3	*parse_vector3(char *str)
 
 int	load_asset_key_value_pair(char **key_value, t_assets *assets)
 {
-	if (!ft_strncmp("NO", key_value[0], 3))
+	if (!ft_strncmp("F", key_value[0], 2))
+		assets->floor_color = parse_vector3(key_value[1]);
+	else if (!ft_strncmp("C", key_value[0], 2))
+		assets->ceiling_color = parse_vector3(key_value[1]);
+	else if (!has_extension(key_value[1], ".xpm"))
+		return (0);
+	else if (!ft_strncmp("NO", key_value[0], 3))
 		assets->n_texture.addr = ft_strdup(key_value[1]);
 	else if (!ft_strncmp("SO", key_value[0], 3))
 		assets->s_texture.addr = ft_strdup(key_value[1]);
@@ -49,10 +56,6 @@ int	load_asset_key_value_pair(char **key_value, t_assets *assets)
 		assets->w_texture.addr = ft_strdup(key_value[1]);
 	else if (!ft_strncmp("EA", key_value[0], 3))
 		assets->e_texture.addr = ft_strdup(key_value[1]);
-	else if (!ft_strncmp("F", key_value[0], 2))
-		assets->floor_color = parse_vector3(key_value[1]);
-	else if (!ft_strncmp("C", key_value[0], 2))
-		assets->ceiling_color = parse_vector3(key_value[1]);
 	else
 		return (0);
 	return (1);

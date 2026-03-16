@@ -2,28 +2,28 @@
 
 int get_texture_pixel(t_texture *tex, int x, int y)
 {
-    char *dst;
+	char *dst;
 
-    dst = tex->addr + (y * tex->line_len + x * (tex->bpp / 8));
-    return (*(unsigned int *)dst);
+	dst = tex->addr + (y * tex->line_len + x * (tex->bpp / 8));
+	return (*(unsigned int *)dst);
 }
 
 t_texture *select_texture(t_data *game, t_ray *ray)
 {
-    if (ray->side == 0)
-    {
-        if (ray->stepX > 0)
-            return (&game->west);
-        else
-            return (&game->east);
-    }
-    else
-    {
-        if (ray->stepY > 0)
-			return (&game->north);
+	if (ray->side == 0)
+	{
+		if (ray->stepX > 0)
+			return (&game->assets.w_texture);
 		else
-			return (&game->south);
-    }
+			return (&game->assets.e_texture);
+	}
+	else
+	{
+		if (ray->stepY > 0)
+			return (&game->assets.n_texture);
+		else
+			return (&game->assets.s_texture);
+	}
 }
 
 void draw_textured_wall(t_data *game, t_hit hit, int x, int lineHeight)
