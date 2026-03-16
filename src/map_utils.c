@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 16:33:28 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/31 16:33:28 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/13 17:02:34 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/13 17:02:40 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	free_strs(char **strs)
 {
 	size_t	index;
 
+	if (!strs)
+		return ;
 	index = 0;
 	while (strs[index])
 	{

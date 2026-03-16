@@ -1,3 +1,12 @@
+NO ./map.cub
+SO ./map.cub
+WE ./map.cub
+EA ./map.cub
+
+
+F 220,10,0
+C 220,10,5,5
+
 11111111111
 10W000001
 111111111

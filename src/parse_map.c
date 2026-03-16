@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/08 21:56:38 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/09 13:53:23 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/16 11:13:56 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/16 11:14:53 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*format_row(char *original, int length)
 
 	output = zalloc(sizeof(char) * (length + 1));
 	if (!output)
-		return (0);
+		return (ft_putstr_fd("Error\nMalloc error\n", 2), 0);
 	index = 0;
 	original_end = 0;
 	while (index < length)
@@ -86,7 +86,8 @@ t_pos	*format_map(char ***map)
 	size->y = ft_tablen(*map);
 	output = zalloc(sizeof(char *) * size->y);
 	if (!output)
-		return (free(size), (t_pos *)0);
+		return (ft_putstr_fd("Error\nMalloc error\n", 2),
+			free(size), (t_pos *)0);
 	index = 0;
 	while ((*map)[index])
 	{
@@ -95,7 +96,6 @@ t_pos	*format_map(char ***map)
 			return (free(size), free_strs(output), (t_pos *)0);
 		index ++;
 	}
-	free_strs(*map);
 	*map = output;
 	return (size);
 }
@@ -108,16 +108,17 @@ int	init_map(char *filename, t_data *game)
 	char	**temp;
 
 	if (access(filename, R_OK) || !has_extension(filename, ".cub"))
-		return (ft_putstr_fd("Invalid filename\n", 2), 0);
+		return (ft_putstr_fd("Error\nInvalid filename\n", 2), 0);
 	fd = open(filename, O_RDONLY);
 	temp = fullread_fd(fd);
 	game->map.map = parse_assets(temp, &game->assets);
 	close(fd);
 	if (!game->map.map || !check_map(game->map.map, &player))
-		return (free_strs(game->map.map), 0);
+		return (free_strs(temp), 0);
 	map_size = format_map(&game->map.map);
+	free_strs(temp);
 	if (!map_size)
-		return (free_strs(game->map.map), 0);
+		return (0);
 	game->map.size_map[1] = map_size->y;
 	game->map.size_map[0] = map_size->x;
 	free(map_size);

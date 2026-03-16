@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/08 21:54:31 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/08 21:55:41 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/13 16:45:46 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/13 16:46:16 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	in_range(int min, int max, int x)
 
 int	check_color(t_vector3 *vector)
 {
-	return (vector && in_range(0, 255, vector->x)
+	return (vector
+		&& in_range(0, 255, vector->x)
 		&& in_range(0, 255, vector->y)
 		&& in_range(0, 255, vector->z));
 }
@@ -33,7 +34,7 @@ int	check_texture(char *texture)
 int	check_loaded_assets(t_assets *assets)
 {
 	return (check_color(assets->ceiling_color)
-		&& check_color(assets->ceiling_color)
+		&& check_color(assets->floor_color)
 		&& check_texture(assets->n_texture)
 		&& check_texture(assets->s_texture)
 		&& check_texture(assets->w_texture)

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/08 21:53:46 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/08 21:53:46 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/16 11:12:05 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/16 11:13:15 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,14 @@ int	check_closed_map(char **map, int x, int y)
 
 int	check_map(char **map, t_pos *player)
 {
+	int	output;
+
 	map = ft_strsdup(map);
 	if (!map)
-		return (0);
-	return (check_chars(map, player)
-		&& check_closed_map(map, player->x, player->y));
+		return (ft_putstr_fd("Error\nMalloc error\n", 2), 0);
+	output = check_chars(map, player)
+		&& check_closed_map(map, player->x, player->y);
+	if (!output)
+		ft_putstr_fd("Error\nInvalid map\n", 2);
+	return (output);
 }
