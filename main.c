@@ -43,9 +43,6 @@ int close_win(t_data *game)
 
 int move_player (int keycode, t_data *game)
 {
-	// update_map(game);
-	// vanish_line(game);
-	// print_useful(game);
 	if (keycode == 'w')
 		move_front(game);
 	else if (keycode == 'a')
@@ -68,14 +65,10 @@ int move_player (int keycode, t_data *game)
 		if (game->player.angle < 0)
 			game->player.angle += 2 * pi;
 	}
-	else
-	printf("keycode = %d\n", keycode);
 	mlx_clear_window(game->mlx.mlx, game->mlx.mlx_win);
 	draw_sky_g(game);
 	draw_walls(game);
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win, game->windata.img, 0, 0);
-	// draw_line_player(game);
-	// draw_player(game);
 	return (0);
 }
 
@@ -87,11 +80,15 @@ int main(void)
 	game.windata.img = mlx_new_image(game.mlx.mlx, WIN_X, WIN_Y);
 	game.windata.addr = mlx_get_data_addr(game.windata.img, &game.windata.bpp, &game.windata.line_length, &game.windata.endian); //code pour set les variable en fonction de la taille de l'image
 	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, WIN_X, WIN_Y, "test");
+	if (load_texture(&game, &game.north, "./assets/north.xpm") || load_texture(&game, &game.south, "./assets/south.xpm") ||
+	load_texture(&game, &game.east, "./assets/east.xpm") ||
+	load_texture(&game, &game.west, "./assets/west.xpm"))
+		return (-1);
+
 	draw_map("map.txt", &game);
 	// init_map("map.txt", &game);
 	init_player(&game);
 	// print_useful(&game);
-	// draw_player(&game);
 	draw_sky_g(&game);
 	draw_walls(&game);
 	// print_useful(&game);
