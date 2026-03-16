@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 11:13:56 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/16 11:14:53 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/16 13:13:00 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/16 13:13:04 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*format_row(char *original, int length)
 
 	output = zalloc(sizeof(char) * (length + 1));
 	if (!output)
-		return (ft_putstr_fd("Error\nMalloc error\n", 2), 0);
+		return (ft_putstr_fd("Error\nMalloc error\n", 2), (char *)0);
 	index = 0;
 	original_end = 0;
 	while (index < length)
