@@ -1,28 +1,42 @@
 NAME = cubtest
 
 CC = gcc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = main.c movements.c parse_map.c gnl.c gnl_utils.c utils.c line_utils.c\
-draw_fts.c fts.c
-OBJ = $(SRC:.c=.o)
+SRC_NAMES = assets_utils.c file_utils.c parse_assets.c main.c movements.c parse_map.c gnl.c utils.c line_utils.c map_utils.c map_check.c draw_fts.c fts.c
+SRC = $(addprefix ./src/, $(SRC_NAMES))
+OBJ = $(addprefix ./obj/, $(SRC_NAMES:.c=.o))
 
 MLX_DIR = mlx_linux
 MLX = -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
-INCLUDES = -I$(MLX_DIR) -I/usr/include
+INCLUDES = -I$(MLX_DIR) -I/usr/include  -Iinclude -Ilibft
+LIBFT =  -Llibft -lft
+OBJ_DIR := ./obj
 
-all: $(NAME)
+all: libft-all $(NAME)
 
-%.o: %.c
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+./obj/%.o: ./src/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(MLX) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(MLX) $(LIBFT) -o $(NAME)
 
-clean:
+libft-clean:
+	$(MAKE) -C libft clean
+libft-fclean:
+	$(MAKE) -C libft fclean
+libft-all:
+	$(MAKE) -C libft all
+
+clean: libft-clean cub3d-clean
+
+cub3d-clean:
 	rm -f $(OBJ)
 
-fclean: clean
+fclean: libft-fclean cub3d-clean
 	rm -f $(NAME)
 
 re: fclean all

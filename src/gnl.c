@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mclaudet <mclaudet@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 18:27:45 by mclaudet          #+#    #+#             */
-/*   Updated: 2025/12/15 16:42:49 by mclaudet         ###   ########.fr       */
+/*   Created: 2026/03/16 13:17:59 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/16 13:18:02 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gnl.h"
+#include "libft.h"
 
 char	*extract_line(char **storage)
 {

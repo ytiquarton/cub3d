@@ -40,14 +40,37 @@ typedef struct s_map
 	char **map;
 }               t_map;
 
+typedef struct s_vector3
+{
+	int	x;
+	int	y;
+	int	z;
+}			t_vector3;
+
+typedef struct s_assets
+{
+	char		*n_texture;
+	char		*s_texture;
+	char		*w_texture;
+	char		*e_texture;
+	t_vector3	*floor_color;
+	t_vector3	*ceiling_color;
+}				t_assets;
+
 typedef struct s_data
 {
 	t_mlx_data	mlx;
 	t_windata	windata;
 	t_player	player;
-	t_map       map;
+	t_map		map;
+	t_assets	assets;
+}				t_data;
 
-}               t_data;
+typedef struct s_pos
+{
+	int	x;
+	int	y;
+}				t_pos;
 
 typedef struct s_hit // structure pour les infos du mur touche
 {
@@ -78,7 +101,7 @@ void move_left(t_data *game);
 void move_front(t_data *game);
 void vanish_player(t_data *game);
 void my_mlx_pixel_put(t_windata *data, int x, int y, int color);
-void draw_map(char *name, t_data *game);
+int	draw_map(char *name, t_data *game);
 void update_map(t_data *game);
 int is_in_block(int x, int y, t_data *game);
 // void init_map(char *name, t_data *game);
