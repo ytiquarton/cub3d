@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/13 16:45:46 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/13 16:46:16 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/16 17:29:51 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/16 17:31:35 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	check_loaded_assets(t_assets *assets)
 {
 	return (check_color(assets->ceiling_color)
 		&& check_color(assets->floor_color)
-		&& check_texture(assets->n_texture)
-		&& check_texture(assets->s_texture)
-		&& check_texture(assets->w_texture)
-		&& check_texture(assets->e_texture));
+		&& check_texture(assets->n_texture.addr)
+		&& check_texture(assets->s_texture.addr)
+		&& check_texture(assets->w_texture.addr)
+		&& check_texture(assets->e_texture.addr));
 }
 
 void	free_assets(t_assets *assets)
@@ -47,12 +47,12 @@ void	free_assets(t_assets *assets)
 		free(assets->ceiling_color);
 	if (assets->floor_color)
 		free(assets->floor_color);
-	if (assets->n_texture)
-		free(assets->n_texture);
-	if (assets->s_texture)
-		free(assets->s_texture);
-	if (assets->e_texture)
-		free(assets->e_texture);
-	if (assets->w_texture)
-		free(assets->w_texture);
+	if (assets->n_texture.addr)
+		free(assets->n_texture.addr);
+	if (assets->s_texture.addr)
+		free(assets->s_texture.addr);
+	if (assets->e_texture.addr)
+		free(assets->e_texture.addr);
+	if (assets->w_texture.addr)
+		free(assets->w_texture.addr);
 }

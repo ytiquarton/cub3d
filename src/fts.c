@@ -2,29 +2,29 @@
 
 #define NOLINE WIN_X
 
-void draw_one_wall(t_data *game, t_hit vars, int pos)
-{
-    int rel_posx;
-	int rel_posy;
-	int c_y;
-	int c_x;
-	int stripe_w;
+// void draw_one_wall(t_data *game, t_hit vars, int pos)
+// {
+//     int rel_posx;
+// 	int rel_posy;
+// 	int c_y;
+// 	int c_x;
+// 	int stripe_w;
 
-	stripe_w = WIN_X / NOLINE;
-	rel_posx = stripe_w * pos;
-	rel_posy = (WIN_Y - vars.height) / 2;
-	c_x = 0;
-	while (c_x < stripe_w)
-	{
-		c_y = 0;
-		while (c_y < vars.height)
-		{
-			my_mlx_pixel_put(&game->windata, rel_posx + c_x, rel_posy + c_y, 0x00FF0000);
-			c_y++;
-		}
-		c_x++;
-	}
-}
+// 	stripe_w = WIN_X / NOLINE;
+// 	rel_posx = stripe_w * pos;
+// 	rel_posy = (WIN_Y - vars.height) / 2;
+// 	c_x = 0;
+// 	while (c_x < stripe_w)
+// 	{
+// 		c_y = 0;
+// 		while (c_y < vars.height)
+// 		{
+// 			my_mlx_pixel_put(&game->windata, rel_posx + c_x, rel_posy + c_y, 0x00FF0000);
+// 			c_y++;
+// 		}
+// 		c_x++;
+// 	}
+// }
 
 void	init_delta(t_ray *ray) // calcul delta de la distance (entre ligne de grille)
 {
@@ -118,6 +118,8 @@ void	compute_dist(t_data *game, t_ray *ray, t_hit *hit) // calcul de la distance
 		hit->dist = (ray->mapY - game->player.posy
 				+ (1 - ray->stepY) / 2) / ray->rayDirY;
 	hit->side = ray->side;
+	hit->stepX = ray->stepX;
+	hit->stepY = ray->stepY;
 }
 
 void	compute_wallx(t_data *game, t_ray *ray, t_hit *hit) // calcul de la position texture 
@@ -146,14 +148,13 @@ t_hit	raycast(t_data *game, double rayDirX, double rayDirY)
 	perform_dda(game, &ray);
 	compute_dist(game, &ray, &hit);
 	compute_wallx(game, &ray, &hit);
+	hit.ray = ray;
 	return (hit);
 }  
 
 void draw_walls(t_data *game)
 {
 	t_hit	vars;
-	double rayDirX;
-	double rayDirY;
 	int i;
 	double fov = pi / 3.0; /* 60 degrees */
 	double camera_offset;
@@ -166,9 +167,7 @@ void draw_walls(t_data *game)
 		/* compute a ray per column by offsetting the player's angle */
 		camera_offset = ((double)i - (double)NOLINE / 2.0) / (double)NOLINE; /* roughly -0.5..+0.5 */
 		rayAngle = game->player.angle + camera_offset * fov;
-		rayDirX = cos(rayAngle);
-		rayDirY = sin(rayAngle);
-		vars = raycast(game, rayDirX, rayDirY);
+		vars = raycast(game, cos(rayAngle), sin(rayAngle)); // raydirx et raydiry
 		/* correct distance for fish-eye by using perpendicular distance */
 		perpDist = vars.dist * cos(rayAngle - game->player.angle);
 		if (perpDist <= 0.000001)
@@ -178,7 +177,7 @@ void draw_walls(t_data *game)
 			vars.height = 0;
 		if (vars.height > WIN_Y)
 			vars.height = WIN_Y;
-		draw_one_wall(game, vars, i);
+		draw_textured_wall(game, vars, i, vars.height);
 		i++;
 	}
 	// debug: you can uncomment the next line for a single summary print
