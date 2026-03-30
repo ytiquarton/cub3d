@@ -1,6 +1,6 @@
-NO ./assets/east.xpm
-SO ./assets/east.xpm
-WE ./assets/east.xpm
+NO ./assets/north.xpm
+SO ./assets/south.xpm
+WE ./assets/west.xpm
 EA ./assets/east.xpm
 
 
@@ -13,10 +13,10 @@ C 220,10,5
 100000001
 100000001
 100000001
-1100000001
- 100000001
- 100001001
- 100000001
- 10010E011
- 100001001
- 111111111
+11000000011
+ 11100000001
+   100001001
+   100000001
+   10010E011
+   100001001
+   111111111

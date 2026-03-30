@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assets_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: mclaudet <mclaudet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 17:29:51 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/16 17:31:35 by marccost         ###   ########.ch       */
+/*   Updated: 2026/03/30 20:29:39 by mclaudet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

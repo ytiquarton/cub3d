@@ -1,68 +1,66 @@
 #include "cub3d.h"
 
-
-void	init_delta(t_ray *ray) // calcul delta de la distance (entre ligne de grille)
+void	init_delta(t_ray *ray)
 {
-	/* protect against zero ray direction components */
-	if (ray->rayDirX == 0)
-		ray->deltaDistX = 1e30;
+	if (ray->ray_dir_x == 0)
+		ray->delta_dist_x = 1e30;
 	else
-		ray->deltaDistX = fabs(1 / ray->rayDirX);
-	if (ray->rayDirY == 0)
-		ray->deltaDistY = 1e30;
+		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	if (ray->ray_dir_y == 0)
+		ray->delta_dist_y = 1e30;
 	else
-		ray->deltaDistY = fabs(1 / ray->rayDirY);
+		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 }
 
-void	init_step_x(t_data *game, t_ray *ray) //initialisation de stepx 
+void	init_step_x(t_data *game, t_ray *ray)
 {
-	if (ray->rayDirX < 0)
+	if (ray->ray_dir_x < 0)
 	{
-		ray->stepX = -1;
-		ray->sideDistX = (game->player.posx - ray->mapX)
-			* ray->deltaDistX;
+		ray->step_x = -1;
+		ray->side_dist_x = (game->player.posx - ray->map_x)
+			* ray->delta_dist_x;
 	}
 	else
 	{
-		ray->stepX = 1;
-		ray->sideDistX = (ray->mapX + 1.0 - game->player.posx)
-			* ray->deltaDistX;
-	}
-}
-
-void	init_step_y(t_data *game, t_ray *ray) // initialisation de step y
-{
-	if (ray->rayDirY < 0)
-	{
-		ray->stepY = -1;
-		ray->sideDistY = (game->player.posy - ray->mapY)
-			* ray->deltaDistY;
-	}
-	else
-	{
-		ray->stepY = 1;
-		ray->sideDistY = (ray->mapY + 1.0 - game->player.posy)
-			* ray->deltaDistY;
+		ray->step_x = 1;
+		ray->side_dist_x = (ray->map_x + 1.0 - game->player.posx)
+			* ray->delta_dist_x;
 	}
 }
 
-void	dda_step(t_ray *ray) // avancer d'une case dans la grille 
+void	init_step_y(t_data *game, t_ray *ray)
 {
-	if (ray->sideDistX < ray->sideDistY) // si touche vertical avant
+	if (ray->ray_dir_y < 0)
 	{
-		ray->sideDistX += ray->deltaDistX;
-		ray->mapX += ray->stepX;
+		ray->step_y = -1;
+		ray->side_dist_y = (game->player.posy - ray->map_y)
+			* ray->delta_dist_y;
+	}
+	else
+	{
+		ray->step_y = 1;
+		ray->side_dist_y = (ray->map_y + 1.0 - game->player.posy)
+			* ray->delta_dist_y;
+	}
+}
+
+void	dda_step(t_ray *ray)
+{
+	if (ray->side_dist_x < ray->side_dist_y)
+	{
+		ray->side_dist_x += ray->delta_dist_x;
+		ray->map_x += ray->step_x;
 		ray->side = 0;
 	}
 	else
 	{
-		ray->sideDistY += ray->deltaDistY;
-		ray->mapY += ray->stepY;
+		ray->side_dist_y += ray->delta_dist_y;
+		ray->map_y += ray->step_y;
 		ray->side = 1;
 	}
 }
 
-void	perform_dda(t_data *game, t_ray *ray) // boucle dda
+void	perform_dda(t_data *game, t_ray *ray)
 {
 	int	hit;
 
@@ -70,16 +68,14 @@ void	perform_dda(t_data *game, t_ray *ray) // boucle dda
 	while (hit == 0)
 	{
 		dda_step(ray);
-		/* guard against stepping outside the map bounds */
-		if (!game || !game->map.map || ray->mapX < 0 || ray->mapY < 0
-			|| ray->mapX >= game->map.size_map[0]
-			|| ray->mapY >= game->map.size_map[1])
+		if (!game || !game->map.map || ray->map_x < 0 || ray->map_y < 0
+			|| ray->map_x >= game->map.size_map[0]
+			|| ray->map_y >= game->map.size_map[1])
 		{
-			/* treat out-of-bounds as a hit to stop the loop */
 			hit = 1;
-			break;
+			break ;
 		}
-		if (game->map.map[ray->mapY][ray->mapX] == '1')
+		if (game->map.map[ray->map_y][ray->map_x] == '1')
 			hit = 1;
 	}
 }

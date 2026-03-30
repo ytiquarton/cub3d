@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: mclaudet <mclaudet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:46:27 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/16 13:46:37 by marccost         ###   ########.ch       */
+/*   Updated: 2026/03/30 20:47:57 by mclaudet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	**add_one_malloc(char **tab)
 
 	i = 0;
 	copy = malloc((ft_strslen(tab) + 2) * sizeof(char *));
+	if (!copy)
+		return (NULL);
 	while (tab[i])
 	{
 		copy[i] = tab[i];
@@ -100,7 +102,7 @@ t_pos	*format_map(char ***map)
 	return (size);
 }
 
-int	init_map(char *filename, t_data *game)
+int	draw_map(char *filename, t_data *game)
 {
 	t_pos		*map_size;
 	int			fd;
@@ -121,33 +123,6 @@ int	init_map(char *filename, t_data *game)
 	game->map.size_map[1] = map_size->y;
 	game->map.size_map[0] = map_size->x;
 	free(map_size);
-	return (1);
-}
-
-
-void	draw_block(int x, int y, int tile_w, int tile_h, t_data *game)
-{
-	int i = 0;
-	int j;
-
-	while (i < tile_w)
-	{
-		j = 0;
-		while (j < tile_h)
-		{
-			my_mlx_pixel_put(&game->windata, x + i, y + j, 0x00FFFF00);
-			j++;
-		}
-		i++;
-	}
-}
-
-
-
-int	draw_map(char *name, t_data *game)
-{
-	if (!init_map(name, game))
-		return (0);
 	game->player.posx = game->player.posx + 0.5f;
 	game->player.posy = game->player.posy + 0.5f;
 	return (1);

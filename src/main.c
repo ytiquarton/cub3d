@@ -1,42 +1,23 @@
 #include "cub3d.h"
 #include "libft.h"
 
-void print_useful(t_data *game)
-{
-	int i, j;
-	i = 0;
-	while (game->map.map[i])
-	{
-		j = 0;
-		while (game->map.map[i][j])
-		{
-			printf("%c", game->map.map[i][j]);
-			j++;
-		}
-		i++;
-	}
-	printf("\np.x = %f, p.y = %f, p.a = %f\n", game->player.posx, game->player.posy, game->player.angle);
-}
-
-void my_mlx_pixel_put(t_windata *data, int x, int y, int color)
-{
-	char *dst;
-
-	if (x < 0 || y < 0)
-		return ;
-	if (x >= WIN_X || y >= WIN_Y)
-		return ;
-	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
-	*(unsigned int*)dst = color;
-}
-
-int close_win(t_data *game)
+int	close_win(t_data *game)
 {
 	mlx_destroy_window(game->mlx.mlx, game->mlx.mlx_win);
 	exit (0);
 }
 
-int move_player (int keycode, t_data *game)
+int	refresh_window(t_data *game)
+{
+	mlx_clear_window(game->mlx.mlx, game->mlx.mlx_win);
+	draw_sky_g(game);
+	draw_walls(game);
+	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win,
+		game->windata.img, 0, 0);
+	return (0);
+}
+
+int	move_player(int keycode, t_data *game)
 {
 	if (keycode == 'w')
 		move_front(game);
@@ -60,14 +41,21 @@ int move_player (int keycode, t_data *game)
 		if (game->player.angle < 0)
 			game->player.angle += 2 * pi;
 	}
-	mlx_clear_window(game->mlx.mlx, game->mlx.mlx_win);
-	draw_sky_g(game);
-	draw_walls(game);
-	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win, game->windata.img, 0, 0);
-	return (0);
+	return (refresh_window(game));
 }
 
-int main(int argc, char **argv)
+void	do_game(t_data *game)
+{
+	draw_map("map.txt", game);
+	draw_sky_g(game);
+	draw_walls(game);
+	mlx_put_image_to_window(game->mlx.mlx,
+		game->mlx.mlx_win, game->windata.img, 0, 0);
+	mlx_hook(game->mlx.mlx_win, 2, 1L << 0, move_player, game);
+	mlx_loop(game->mlx.mlx);
+}
+
+int	main(int argc, char **argv)
 {
 	t_data		game;
 
@@ -75,23 +63,16 @@ int main(int argc, char **argv)
 		return (ft_putstr_fd("Wrong number of arguments!\n", 2), 1);
 	game.mlx.mlx = mlx_init();
 	game.windata.img = mlx_new_image(game.mlx.mlx, WIN_X, WIN_Y);
-	game.windata.addr = mlx_get_data_addr(game.windata.img, &game.windata.bpp, &game.windata.line_length, &game.windata.endian); //code pour set les variable en fonction de la taille de l'image
+	game.windata.addr = mlx_get_data_addr(game.windata.img, &game.windata.bpp,
+			&game.windata.line_length, &game.windata.endian);
 	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, WIN_X, WIN_Y, "test");
 	if (!draw_map(argv[1], &game))
 		return (1);
-	if (load_texture(&game, &game.assets.n_texture) || load_texture(&game, &game.assets.s_texture) ||
-	load_texture(&game, &game.assets.e_texture) ||
-	load_texture(&game, &game.assets.w_texture))
+	if (load_texture(&game, &game.assets.n_texture)
+		|| load_texture(&game, &game.assets.s_texture)
+		|| load_texture(&game, &game.assets.e_texture)
+		|| load_texture(&game, &game.assets.w_texture))
 		return (-1);
-
-	draw_map("map.txt", &game);
-	// init_map("map.txt", &game);
-	// print_useful(&game);
-	draw_sky_g(&game);
-	draw_walls(&game);
-	// print_useful(&game);
-	mlx_put_image_to_window(game.mlx.mlx, game.mlx.mlx_win, game.windata.img, 0, 0);
-	mlx_hook(game.mlx.mlx_win, 2, 1L<<0, move_player, &game);
-	mlx_loop(game.mlx.mlx);
+	do_game(&game);
 	return (0);
 }
