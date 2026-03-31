@@ -53,6 +53,7 @@ void	do_game(t_data *game)
 	mlx_put_image_to_window(game->mlx.mlx,
 		game->mlx.mlx_win, game->windata.img, 0, 0);
 	mlx_hook(game->mlx.mlx_win, 2, 1L << 0, move_player, game);
+	mlx_hook(game->mlx.mlx_win, 17, 0, close_win, game);
 	mlx_loop(game->mlx.mlx);
 }
 
