@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:40:25 by marccost          #+#    #+#             */
 /*   Updated: 2026/03/31 15:40:46 by marccost         ###   ########.ch       */

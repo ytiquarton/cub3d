@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_assets.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 16:48:26 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/31 16:48:26 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 17:42:07 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 17:42:07 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 

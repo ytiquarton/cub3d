@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 17:13:19 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/31 17:13:19 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 17:41:57 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 17:41:57 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 

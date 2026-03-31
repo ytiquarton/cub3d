@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 31/03/2026 14:09:39 by marccost          #+#    #+#             */
-/*   Updated: 31/03/2026 14:12:32 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 17:42:46 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 17:43:00 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ void	update_map(t_data *game);
 int		is_in_block(int x, int y, t_data *game);
 void	draw_walls(t_data *game);
 void	convert_colors(t_data *game);
-
 
 int		draw_sky_g(t_data *game);
 int		load_texture(t_data *game, t_texture *tex);

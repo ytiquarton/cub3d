@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 16:29:05 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/31 16:29:08 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 17:42:15 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 17:42:15 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -41,6 +41,14 @@ This project is currently configured for Linux and uses:
 
 If your system does not already provide the X11 headers/libs used by MiniLibX, install them first.
 
+### Norminette verification
+
+Run:
+
+```bash
+find . -path "./mlx_linux" -prune -o -name "*.c" -print0 -o -name "*.h" -print0 | xargs -0 norminette
+```
+
 ### Compilation
 
 From the repository root, run:

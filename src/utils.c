@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mclaudet <mclaudet@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 13:19:58 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/28 15:34:35 by mclaudet         ###   ########.fr       */
+/*   Created: 2026/03/31 17:40:20 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 17:40:34 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "cub3d.h"
 
-void convert_colors(t_data *game)
+void	convert_colors(t_data *game)
 {
 	game->assets.f_col = ((game->assets.floor_color->x) << 16)
-			+ ((game->assets.floor_color->y) << 8)
-			+ ((game->assets.floor_color->z) << 0);
+		+ ((game->assets.floor_color->y) << 8)
+		+ ((game->assets.floor_color->z) << 0);
 	game->assets.c_col = ((game->assets.ceiling_color->x) << 16)
-			+ ((game->assets.ceiling_color->y) << 8)
-			+ ((game->assets.ceiling_color->z) << 0);
+		+ ((game->assets.ceiling_color->y) << 8)
+		+ ((game->assets.ceiling_color->z) << 0);
 	free(game->assets.floor_color);
 	free(game->assets.ceiling_color);
 }
