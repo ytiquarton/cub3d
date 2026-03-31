@@ -56,6 +56,7 @@ int	move_player(int keycode, t_data *game)
 
 void	do_game(t_data *game)
 {
+	convert_colors(game);
 	draw_sky_g(game);
 	draw_walls(game);
 	mlx_put_image_to_window(game->mlx.mlx,

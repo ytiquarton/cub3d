@@ -25,12 +25,12 @@ int	draw_sky_g(t_data *game)
 		y = 0;
 		while (y < WIN_Y / 2)
 		{
-			my_mlx_pixel_put(&game->windata, x, y, 0x000000FF);
+			my_mlx_pixel_put(&game->windata, x, y, game->assets.c_col);
 			y++;
 		}
 		while (y < WIN_Y)
 		{
-			my_mlx_pixel_put(&game->windata, x, y, 0x0000FF00);
+			my_mlx_pixel_put(&game->windata, x, y, game->assets.f_col);
 			y++;
 		}
 		x++;
