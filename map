@@ -4,8 +4,8 @@ WE ./assets/west.xpm
 EA ./assets/east.xpm
 
 
-F 0,0,255
-C 0,0,255
+F 0,255,0
+C 255,0,5
 
 11111111111
 100000001

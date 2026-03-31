@@ -51,6 +51,8 @@ int	move_player(int keycode, t_data *game)
 		if (game->player.angle < 0)
 			game->player.angle += 2 * PI;
 	}
+	else
+		return (0);
 	return (refresh_window(game));
 }
 
