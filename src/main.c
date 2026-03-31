@@ -4,7 +4,6 @@
 
 int	close_win(t_data *game)
 {
-	free_assets(&(game->assets));
 	mlx_destroy_window(game->mlx.mlx, game->mlx.mlx_win);
 	exit (0);
 }
@@ -63,13 +62,13 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (ft_putstr_fd("Wrong number of arguments!\n", 2), 1);
+	if (!draw_map(argv[1], &game))
+		return (1);
 	game.mlx.mlx = mlx_init();
 	game.windata.img = mlx_new_image(game.mlx.mlx, WIN_X, WIN_Y);
 	game.windata.addr = mlx_get_data_addr(game.windata.img, &game.windata.bpp,
 			&game.windata.line_length, &game.windata.endian);
 	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, WIN_X, WIN_Y, "test");
-	if (!draw_map(argv[1], &game))
-		return (1);
 	if (load_texture(&game, &game.assets.n_texture)
 		|| load_texture(&game, &game.assets.s_texture)
 		|| load_texture(&game, &game.assets.e_texture)

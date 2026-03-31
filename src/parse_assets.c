@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_assets.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+      */
+/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 18:00:33 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/16 18:01:39 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 16:48:26 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 16:48:26 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,25 @@ t_vector3	*parse_vector3(char *str)
 	output->x = ft_atoi(strs[0]);
 	output->y = ft_atoi(strs[1]);
 	output->z = ft_atoi(strs[2]);
-	free(strs);
+	free_strs(strs);
 	return (output);
 }
 
 int	load_asset_key_value_pair(char **key_value, t_assets *assets)
 {
-	if (!ft_strncmp("F", key_value[0], 2))
+	if (!ft_strncmp("F", key_value[0], 2) && !assets->floor_color)
 		assets->floor_color = parse_vector3(key_value[1]);
-	else if (!ft_strncmp("C", key_value[0], 2))
+	else if (!ft_strncmp("C", key_value[0], 2) && !assets->ceiling_color)
 		assets->ceiling_color = parse_vector3(key_value[1]);
 	else if (!has_extension(key_value[1], ".xpm"))
 		return (0);
-	else if (!ft_strncmp("NO", key_value[0], 3))
+	else if (!ft_strncmp("NO", key_value[0], 3) && !assets->n_texture.addr)
 		assets->n_texture.addr = ft_strdup(key_value[1]);
-	else if (!ft_strncmp("SO", key_value[0], 3))
+	else if (!ft_strncmp("SO", key_value[0], 3) && !assets->s_texture.addr)
 		assets->s_texture.addr = ft_strdup(key_value[1]);
-	else if (!ft_strncmp("WE", key_value[0], 3))
+	else if (!ft_strncmp("WE", key_value[0], 3) && !assets->w_texture.addr)
 		assets->w_texture.addr = ft_strdup(key_value[1]);
-	else if (!ft_strncmp("EA", key_value[0], 3))
+	else if (!ft_strncmp("EA", key_value[0], 3) && !assets->e_texture.addr)
 		assets->e_texture.addr = ft_strdup(key_value[1]);
 	else
 		return (0);

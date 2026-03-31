@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:13:07 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/31 14:13:11 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 16:33:42 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 16:33:47 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	load_texture(t_data *game, t_texture *tex)
 		printf("error while loading_textures");
 		return (-1);
 	}
+	free(tex->addr);
 	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp,
 			&tex->line_len, &tex->endian);
 	return (0);

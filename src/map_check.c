@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:15:19 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/31 14:15:27 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 16:29:05 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 16:29:08 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ int	check_map(char **map, t_player *player)
 		&& check_closed_map(map, player->posx, player->posy);
 	if (!output)
 		ft_putstr_fd("Error\nInvalid map\n", 2);
+	free_strs(map);
 	return (output);
 }

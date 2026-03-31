@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 14:24:48 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/31 14:25:06 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 16:44:36 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 16:45:33 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "file_utils.h"
 #include "parse_assets.h"
 #include "utils.h"
+#include "assets_utils.h"
 
 char	**add_one_malloc(char **tab)
 {
@@ -118,11 +119,11 @@ int	draw_map(char *filename, t_data *game)
 	game->map.map = parse_assets(temp, &game->assets);
 	close(fd);
 	if (!game->map.map || !check_map(game->map.map, &game->player))
-		return (free_strs(temp), 0);
+		return (free_strs(temp), free_assets(&game->assets), 0);
 	map_size = format_map(&game->map.map);
 	free_strs(temp);
 	if (!map_size)
-		return (0);
+		return (free_assets(&game->assets), 0);
 	game->map.size_map[1] = map_size->y;
 	game->map.size_map[0] = map_size->x;
 	free(map_size);
