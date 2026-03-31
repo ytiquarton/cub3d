@@ -13,6 +13,18 @@
 #include "libft.h"
 #include "cub3d.h"
 
+void convert_colors(t_data *game)
+{
+	game->assets.f_col = ((game->assets.floor_color->x) << 16)
+			+ ((game->assets.floor_color->y) << 8)
+			+ ((game->assets.floor_color->z) << 0);
+	game->assets.c_col = ((game->assets.ceiling_color->x) << 16)
+			+ ((game->assets.ceiling_color->y) << 8)
+			+ ((game->assets.ceiling_color->z) << 0);
+	free(game->assets.floor_color);
+	free(game->assets.ceiling_color);
+}
+
 int	ft_tablen(char **tab)
 {
 	int	i;

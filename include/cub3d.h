@@ -77,6 +77,8 @@ typedef struct s_assets
 	t_texture	s_texture;
 	t_texture	w_texture;
 	t_texture	e_texture;
+	int			c_col;
+	int			f_col;
 	t_vector3	*floor_color;
 	t_vector3	*ceiling_color;
 }				t_assets;
@@ -142,6 +144,8 @@ int		draw_map(char *name, t_data *game);
 void	update_map(t_data *game);
 int		is_in_block(int x, int y, t_data *game);
 void	draw_walls(t_data *game);
+void	convert_colors(t_data *game);
+
 
 int		draw_sky_g(t_data *game);
 int		load_texture(t_data *game, t_texture *tex);
