@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 16:44:36 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/31 16:45:33 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 17:13:19 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 17:13:19 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_pos	*format_map(char ***map)
 		return ((t_pos *)0);
 	size->x = longest_str_len(*map);
 	size->y = ft_tablen(*map);
-	output = zalloc(sizeof(char *) * size->y);
+	output = zalloc(sizeof(char *) * (size->y + 1));
 	if (!output)
 		return (ft_putstr_fd("Error\nMalloc error\n", 2),
 			free(size), (t_pos *)0);

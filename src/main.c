@@ -1,10 +1,19 @@
 #include "cub3d.h"
 #include "libft.h"
 #include "assets_utils.h"
+#include "map_utils.h"
 
 int	close_win(t_data *game)
 {
+	mlx_destroy_image(game->mlx.mlx, game->assets.n_texture.img);
+	mlx_destroy_image(game->mlx.mlx, game->assets.s_texture.img);
+	mlx_destroy_image(game->mlx.mlx, game->assets.e_texture.img);
+	mlx_destroy_image(game->mlx.mlx, game->assets.w_texture.img);
+	mlx_destroy_image(game->mlx.mlx, game->windata.img);
 	mlx_destroy_window(game->mlx.mlx, game->mlx.mlx_win);
+	mlx_destroy_display(game->mlx.mlx);
+	free(game->mlx.mlx);
+	free_strs(game->map.map);
 	exit (0);
 }
 
