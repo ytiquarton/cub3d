@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mclaudet <mclaudet@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 13:17:59 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/17 11:30:15 by mclaudet         ###   ########.fr       */
+/*   Created: 2026/03/31 15:40:25 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 15:40:46 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	read_to_storage(int fd, char **storage)
 {
 	char	*buf;
 	int		bytes_read;
+	char	*temp;
 
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
@@ -47,7 +48,9 @@ int	read_to_storage(int fd, char **storage)
 		return (-1);
 	}
 	buf[bytes_read] = '\0';
-	*storage = ft_strjoin(*storage, buf);
+	temp = *storage;
+	*storage = ft_strjoin(temp, buf);
+	free(temp);
 	free(buf);
 	return (bytes_read);
 }

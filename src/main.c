@@ -1,8 +1,10 @@
 #include "cub3d.h"
 #include "libft.h"
+#include "assets_utils.h"
 
 int	close_win(t_data *game)
 {
+	free_assets(&(game->assets));
 	mlx_destroy_window(game->mlx.mlx, game->mlx.mlx_win);
 	exit (0);
 }
@@ -31,13 +33,13 @@ int	move_player(int keycode, t_data *game)
 		close_win(game);
 	else if (keycode == 65363)
 	{
-		game->player.angle += 0.1;
+		game->player.angle += 0.05;
 		if (game->player.angle > 2 * PI)
 			game->player.angle -= 2 * PI;
 	}
 	else if (keycode == 65361)
 	{
-		game->player.angle -= 0.1;
+		game->player.angle -= 0.05;
 		if (game->player.angle < 0)
 			game->player.angle += 2 * PI;
 	}
@@ -46,7 +48,6 @@ int	move_player(int keycode, t_data *game)
 
 void	do_game(t_data *game)
 {
-	draw_map("map.txt", game);
 	draw_sky_g(game);
 	draw_walls(game);
 	mlx_put_image_to_window(game->mlx.mlx,
@@ -58,7 +59,6 @@ void	do_game(t_data *game)
 int	main(int argc, char **argv)
 {
 	t_data		game;
-	int			test;
 
 	if (argc != 2)
 		return (ft_putstr_fd("Wrong number of arguments!\n", 2), 1);
@@ -67,9 +67,7 @@ int	main(int argc, char **argv)
 	game.windata.addr = mlx_get_data_addr(game.windata.img, &game.windata.bpp,
 			&game.windata.line_length, &game.windata.endian);
 	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, WIN_X, WIN_Y, "test");
-	test = draw_map(argv[1], &game);
-	printf("%d\n", test);
-	if (!test)
+	if (!draw_map(argv[1], &game))
 		return (1);
 	if (load_texture(&game, &game.assets.n_texture)
 		|| load_texture(&game, &game.assets.s_texture)
