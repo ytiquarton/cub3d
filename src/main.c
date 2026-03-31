@@ -32,14 +32,14 @@ int	move_player(int keycode, t_data *game)
 	else if (keycode == 65363)
 	{
 		game->player.angle += 0.1;
-		if (game->player.angle > 2 * pi)
-			game->player.angle -= 2 * pi;
+		if (game->player.angle > 2 * PI)
+			game->player.angle -= 2 * PI;
 	}
 	else if (keycode == 65361)
 	{
 		game->player.angle -= 0.1;
 		if (game->player.angle < 0)
-			game->player.angle += 2 * pi;
+			game->player.angle += 2 * PI;
 	}
 	return (refresh_window(game));
 }
@@ -58,6 +58,7 @@ void	do_game(t_data *game)
 int	main(int argc, char **argv)
 {
 	t_data		game;
+	int			test;
 
 	if (argc != 2)
 		return (ft_putstr_fd("Wrong number of arguments!\n", 2), 1);
@@ -66,7 +67,9 @@ int	main(int argc, char **argv)
 	game.windata.addr = mlx_get_data_addr(game.windata.img, &game.windata.bpp,
 			&game.windata.line_length, &game.windata.endian);
 	game.mlx.mlx_win = mlx_new_window(game.mlx.mlx, WIN_X, WIN_Y, "test");
-	if (!draw_map(argv[1], &game))
+	test = draw_map(argv[1], &game);
+	printf("%d\n", test);
+	if (!test)
 		return (1);
 	if (load_texture(&game, &game.assets.n_texture)
 		|| load_texture(&game, &game.assets.s_texture)

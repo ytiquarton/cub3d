@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/31 16:28:08 by marccost          #+#    #+#             */
-/*   Updated: 2026/01/31 16:28:48 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 14:13:25 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 14:13:25 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 

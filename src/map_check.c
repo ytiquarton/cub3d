@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+      */
+/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 13:58:56 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/16 13:58:56 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 14:15:19 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 14:15:27 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ float	get_angle(char c)
 	if (c == 'E')
 		return (0);
 	else if (c == 'S')
-		return (pi / 2);
+		return (PI / 2);
 	else if (c == 'W')
-		return (pi);
+		return (PI);
 	else if (c == 'N')
-		return (pi * 3 / 2);
+		return (PI * 3 / 2);
 	return (-1);
 }
 

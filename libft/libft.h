@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 23:56:56 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/05 23:56:59 by marccost         ###   ########.ch       */
+/*   Created: 2026/03/31 14:13:33 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 14:13:33 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 

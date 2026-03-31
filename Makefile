@@ -3,7 +3,7 @@ NAME = cubtest
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC_NAMES = assets_utils.c file_utils.c parse_assets.c main.c movements.c parse_map.c gnl.c utils.c line_utils.c map_utils.c map_check.c draw_fts.c fts.c init.c insert_image.c dda.c raycast.c parse_map_2.c
+SRC_NAMES = assets_utils.c file_utils.c parse_assets.c main.c movements.c parse_map.c gnl.c utils.c line_utils.c map_utils.c map_check.c draw_fts.c fts.c init.c insert_image.c dda.c raycast.c
 SRC = $(addprefix ./src/, $(SRC_NAMES))
 OBJ = $(addprefix ./obj/, $(SRC_NAMES:.c=.o))
 

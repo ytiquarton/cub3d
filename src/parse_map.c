@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mclaudet <mclaudet@42lausanne.ch>          +#+  +:+       +#+        */
+/*   By: marccost <marccost@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 13:46:27 by marccost          #+#    #+#             */
-/*   Updated: 2026/03/30 20:47:57 by mclaudet         ###   ########.fr       */
+/*   Created: 2026/03/31 14:24:48 by marccost          #+#    #+#             */
+/*   Updated: 2026/03/31 14:25:06 by marccost         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,10 @@ int	draw_map(char *filename, t_data *game)
 	char		**temp;
 
 	if (access(filename, R_OK) || !has_extension(filename, ".cub"))
-		return (ft_putstr_fd("Error\nInvalid filename\n", 2), 0);
+	{
+		ft_putstr_fd("Error\nInvalid filename\n", 2);
+		return (0);
+	}
 	fd = open(filename, O_RDONLY);
 	temp = fullread_fd(fd);
 	game->map.map = parse_assets(temp, &game->assets);
