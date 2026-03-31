@@ -136,6 +136,9 @@ The map must be closed by walls, or the program exits with an error.
 - Lode Vandevenne's raycasting tutorial
 - F. Permadi's raycasting tutorial series
 - Harm-Smits 42 documentation for MiniLibX and graphics projects
+- DDA page on Wikipedia : https://en.wikipedia.org/wiki/Digital_differential_analyzer_(graphics_algorithm)
+- Youtube video "Make your own raycaster part 1/2" by 3DSage : https://www.youtube.com/watch?v=PC1RaETIx3Y&t
+- Unfortunately didn't note all resources since README requirements were introduce during the project.
 
 ### AI usage
 
